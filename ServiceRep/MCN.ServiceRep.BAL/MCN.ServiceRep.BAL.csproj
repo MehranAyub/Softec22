@@ -47,4 +47,8 @@
     <ProjectReference Include="..\..\Core\MCN.Core.Entities\MCN.Core.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ServicesRepositoryBL\ISearchRepositoryBL\Dtos\" />
+  </ItemGroup>
+
 </Project>
