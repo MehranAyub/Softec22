@@ -32,34 +32,34 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.IInterestRepositoryBL
     {
         public List<InterestDto> GetInterests(InterestFilterDto filter);
     }
-    public class InterestRepositoryBL : BaseRepository, IInterestRepositoryBL
-    {
-        public InterestRepositoryBL(RepositoryContext repository) : base(repository)
-        {
+    //public class InterestRepositoryBL : BaseRepository, IInterestRepositoryBL
+    //{
+    //    public InterestRepositoryBL(RepositoryContext repository) : base(repository)
+    //    {
             
 
-        }
+    //    }
 
-        public List<InterestDto> GetInterests(InterestFilterDto filter)
-        {
-            var result = repositoryContext.Interests.AsQueryable();
-            if (!string.IsNullOrWhiteSpace(filter.Keyword))
-            {
-                result = result.Where(x => x.Title.Contains(filter.Keyword));
-            }
-            result = result.Skip(filter.PageNumber * filter.PageSize).Take(filter.PageSize);
-            return result.Select(x => 
-            new InterestDto  
-            {
-                 Cost = x.Cost,
-                 Description = x.Description,
-                 Id = x.Id,
-                 Paid = x.Paid,
-                 Title = x.Title,
-                 Type  = x.Type,
-                 Display=x.Title,
-                 Value=x.Title
-            }).ToList();
-        }
-    }
+    //    public List<InterestDto> GetInterests(InterestFilterDto filter)
+    //    {
+    //        var result = repositoryContext.Interests.AsQueryable();
+    //        if (!string.IsNullOrWhiteSpace(filter.Keyword))
+    //        {
+    //            result = result.Where(x => x.Title.Contains(filter.Keyword));
+    //        }
+    //        result = result.Skip(filter.PageNumber * filter.PageSize).Take(filter.PageSize);
+    //        return result.Select(x => 
+    //        new InterestDto  
+    //        {
+    //             Cost = x.Cost,
+    //             Description = x.Description,
+    //             Id = x.Id,
+    //             Paid = x.Paid,
+    //             Title = x.Title,
+    //             Type  = x.Type,
+    //             Display=x.Title,
+    //             Value=x.Title
+    //        }).ToList();
+    //    }
+    //}
 }

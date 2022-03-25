@@ -24,7 +24,6 @@ namespace MCN.ServiceRep.BAL.ContextModel
         public RepositoryContext()
         {
         }
-
         public RepositoryContext(DbContextOptions<RepositoryContext> options)
             : base(options)
         {
@@ -34,9 +33,9 @@ namespace MCN.ServiceRep.BAL.ContextModel
         public virtual DbSet<UserAuthtoken> UserAuthtoken { get; set; }
         public virtual DbSet<UserMultiFactor> UserMultiFactors { get; set; }
         public virtual DbSet<UserLoginType> UserLoginType { get; set; }
-        public DbSet<Interest> Interests { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<UserInterest> UserInterests { get; set; }
+        //public DbSet<Interest> Interests { get; set; }
+        //public DbSet<Location> Locations { get; set; }
+        //public DbSet<UserInterest> UserInterests { get; set; }
         public DbSet<GetUserAddressByDistance> GetUserAddressByDistances { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -44,7 +43,7 @@ namespace MCN.ServiceRep.BAL.ContextModel
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=CYBERSPACE;Initial Catalog=vicinityDb;Integrated Security=true;");
+                optionsBuilder.UseSqlServer("Data Source=CYBERSPACE;Initial Catalog=softecDb;Integrated Security=true;");
             }
         }
         protected override void OnModelCreating(ModelBuilder builder)

@@ -16,7 +16,7 @@ namespace MCN.ServiceRep.DepencyInjuctionInfo
                 services.AddTransient<ILocalsRepositoryBL, LocalsRepositoryBL>();
                 services.AddScoped<IUserRepositoryBL, UserRepositoryBL>();
                 services.AddScoped<ISearchRepositoryBL, SearchRepositoryBL>();
-                services.AddScoped<IInterestRepositoryBL, InterestRepositoryBL>();
+                //services.AddScoped<IInterestRepositoryBL, InterestRepositoryBL>();
 
                 //services.AddTransient<IFormRepositoryBL, FormRepositoryBL>();
                 //services.AddTransient<IAdminOfficeRepositoryBL, AdminOfficeRepositoryBL>();
