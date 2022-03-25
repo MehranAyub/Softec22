@@ -35,7 +35,7 @@ export class EmailVerifyComponent implements OnInit {
       this._authService.VerifyEmailPasscode(this.loginDto.passcode,this.loginDto.email).subscribe(response=>{
         console.log(response);
         if(response.statusCode==200){
-          this.router.navigateByUrl('/job/home');
+          this.router.navigateByUrl('/job/dashboard');
           this._snackbarService.openSnack(response.swallText.title,NotificationTypeEnum.Success,'top');         
         }else{
           this._snackbarService.openSnack(response.swallText.html,NotificationTypeEnum.Danger);
@@ -44,24 +44,7 @@ export class EmailVerifyComponent implements OnInit {
       });
     // }
   }
-
-// Login(){
-//   this.isLoading=true;
-//   this._authService.ValidateEmailPassword(this.loginDto.password,this.loginDto.email).subscribe((response)=>{
-//   console.log(response);  
-//   this.isLoading=false;
-//   if(response.statusCode==200){
-//     this.isEmailVerify=true;
-//     this.isEmailVerifyWithAuthToken=true;
-//     this.router.navigateByUrl('/job/home');
-//     this._snackbarService.openSnack(response.swallText.html,NotificationTypeEnum.Success);  
-
-//   }else{
-//     this._snackbarService.openSnack(response?.swallText?.html,NotificationTypeEnum.Danger);
-//   }
-// });
-//   }
-
+ 
   
   
   isEmailValidate:boolean=false;

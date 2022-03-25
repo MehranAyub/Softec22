@@ -6,9 +6,6 @@ import { Router } from '@angular/router';
 import { DialogService } from 'src/app/shared/services/common/dialog.service';
 import { User } from '../models/user';
 import { Role } from '../models/role';
-import { SearchInputByGoogleMapComponent } from '../../job/components/search-input-by-google-map/search-input-by-google-map.component';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { AccountDataService } from '../services/accountDataService';
 
 @Component({
@@ -16,17 +13,16 @@ import { AccountDataService } from '../services/accountDataService';
   templateUrl: './user-register.component.html',
   styleUrls: ['./user-register.component.scss']
 })
-export class UserRegisterComponent implements OnInit,OnDestroy {
+export class UserRegisterComponent implements OnInit {
   createUserForm:any;
   isEmailVerify:boolean=false;
-  userCreate:User={id:0,email:'',firstName:'',gender:'',lastName:'',password:'',role:Role.User,username:'',token:'',latitude:0,longitude:0};
-  constructor(private _dataService:AccountDataService ,private formBuilder: FormBuilder,private _bottomSheet: MatBottomSheet,private router:Router,private userService:UserService,private snackbarService:SnackBarService,private dialogService:DialogService) { 
+  userCreate:User={id:0,email:'',firstName:'',gender:'',lastName:'',password:'',role:Role.User,username:'',token:''};
+  constructor(private _dataService:AccountDataService ,private formBuilder: FormBuilder,private router:Router,private userService:UserService,private snackbarService:SnackBarService,private dialogService:DialogService) { 
 
     this.createUserForm=this.formBuilder.group({
       firstName:['',[Validators.required]],
       lastName:['',[Validators.required]],
       email:['',[Validators.required,Validators.email]],
-      address:['',[Validators.required]],
       password:['',[Validators.required]],
       confirmPassword:['',[Validators.required]]
     });
@@ -89,56 +85,6 @@ export class UserRegisterComponent implements OnInit,OnDestroy {
      
     }
   } 
-
-
-  // registerUser(){
-  //   this.dialogService.clear();
-  //   this.dialogService.open(SearchInputByGoogleMapComponent,{
-  //     height: '80vh',
-  //     width: '95vw',
-  //     panelClass: 'SearchInputByGoogleMapComponent-dialog' 
-  //   });
-  // }
-
-
-  
-  private _bottomSheetDismissSubscription: Subscription;
-  private _bottomSheetRef: MatBottomSheetRef;
-  // actionConfirmData: ActionConfirmModel = {
-  //   acceptLabel: "Login",
-  //   rejectLabel: "",
-  //   id: "verifyPin",
-  //   heading: "Account found",
-  //   description: "An account already exists for this phone number."
-  // }
-
-  registerUser(): void {
-    this._bottomSheetRef = this._bottomSheet.open(SearchInputByGoogleMapComponent, {
-      data: null,
-      disableClose: false,
-      panelClass: 'bottomsheet-container'
-    });
-
-    this._bottomSheetDismissSubscription = this._bottomSheetRef
-      .afterDismissed()
-      .subscribe((response: any) => {
-        console.log(response);
-        if (response?.code =='200' ) {
-          this.createUserForm.controls.address.setValue(response?.data?.formatted_address);
-          // this.createUserForm.controls['address'].setValue=response?.data?.formatted_address;
-          this.userCreate.latitude=response?.data?.geometry?.location?.lat();
-          this.userCreate.longitude=response?.data?.geometry?.location?.lng();
-          console.log(this.userCreate);
-        }
-      });
-  }
-
-  ngOnDestroy(): void {
-    this._bottomSheetRef = null;
-    if (this._bottomSheetDismissSubscription) {
-      this._bottomSheetDismissSubscription.unsubscribe();
-    }
-  }
 
 
   

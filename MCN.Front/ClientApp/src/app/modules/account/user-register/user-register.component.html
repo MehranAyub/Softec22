@@ -43,12 +43,6 @@
                 </div> 
 
                 <div class="form-floating mb-3"> 
-                  <input type="text" class="form-control" id="address" name="address" (click)="registerUser()" formControlName="address" placeholder="Address"  required>
-                  <control-messages [control]="createUserForm.get('address')"></control-messages>
-              <label for="address"> Address  </label> 
-          </div>  
-
-                <div class="form-floating mb-3"> 
                   <input type="password" class="form-control" id="password" name="password" formControlName="password" placeholder="Password"  required>
                   <control-messages [control]="createUserForm.get('password')"></control-messages>
               <label for="password"> Password  </label> 
