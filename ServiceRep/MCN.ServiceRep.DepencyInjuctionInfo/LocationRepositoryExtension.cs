@@ -1,5 +1,4 @@
 using System;
-using MCN.ServiceRep.BAL.ServicesRepositoryBL.IInterestRepositoryBL;
 using MCN.ServiceRep.BAL.ServicesRepositoryBL.ISearchRepositoryBL;
 using MCN.ServiceRep.BAL.ServicesRepositoryBL.Locals;
 using MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL;
