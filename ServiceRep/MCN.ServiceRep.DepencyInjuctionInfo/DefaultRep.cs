@@ -11,7 +11,7 @@ namespace MCN.ServiceRep.DepencyInjuctionInfo
                 //new DTOEntitiesInjections(services);
                 //new CoreEntitiesInjections(services);               
                 new CommonBALRep(services);
-                new LocationRepositoryExtension(services);              
+               // new LocationRepositoryExtension(services);              
             }
             catch (Exception Exc)
             {

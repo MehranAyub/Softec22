@@ -72,9 +72,6 @@
     <Build Include="dbo\Tables\UserMultiFactors.sql" />
     <Build Include="dbo\Tables\UserAuthtoken.sql" />
     <Build Include="dbo\Tables\UserLoginType.sql" />
-    <Build Include="Account\Tables\Interest.sql" />
-    <Build Include="Account\Tables\Location.sql" />
-    <Build Include="Account\Tables\UserInterest.sql" />
     <Build Include="dbo\Functions\fnCalcDistanceKM.sql" />
     <Build Include="dbo\Stored Procedures\GetUserAddressByDistance.sql" />
     <Build Include="Security\Account.sql" />
