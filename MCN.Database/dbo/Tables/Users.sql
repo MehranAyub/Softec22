@@ -13,8 +13,8 @@
     [UpdatedOn]         DATETIME2 (7)  NULL,
     [UpdatedBy]         INT            NULL,
     [UserLoginTypeId]   INT            NULL,
-    [Latitude]          FLOAT (53)     DEFAULT ((0.0000000000000000e+000)) NOT NULL,
-    [Longitude]         FLOAT (53)     DEFAULT ((0.0000000000000000e+000)) NOT NULL,
     CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
