@@ -34,11 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\MCN.Core.Entities.Params\MCN.Core.Entities.Params.csproj" />
     <ProjectReference Include="..\Core\MCN.Core.Entities\MCN.Core.Entities.csproj" />
-    <ProjectReference Include="..\Infrastructure\MCN.Infrastructure.BAL\MCN.Infrastructure.BAL.csproj" />
     <ProjectReference Include="..\ServiceRep\MCN.ServiceRep.BAL\MCN.ServiceRep.BAL.csproj" />
-    <ProjectReference Include="..\ServiceRep\MCN.ServiceRep.DepencyInjuctionInfo\MCN.ServiceRep.DepencyInjuctionInfo.csproj" />
   </ItemGroup>
 
   <ItemGroup>

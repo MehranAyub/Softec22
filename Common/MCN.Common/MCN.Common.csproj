@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\MCN.Core.Entities\MCN.Core.Entities.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\SourceApp.Infrastructure.Logging\MCN.Infrastructure.Logging.csproj" />
   </ItemGroup>
 
 </Project>

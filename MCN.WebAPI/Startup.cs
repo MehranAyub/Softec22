@@ -7,9 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json; 
-using MCN.ServiceRep.DepencyInjuctionInfo;
 using MCN.WebAPI.Middleware;
 using Microsoft.OpenApi.Models;
+using MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL;
+using MCN.ServiceRep.BAL.Repository;
+using MCN.ServiceRep.BAL.Common;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Http;
 
 namespace MCN.WebAPI
 {
@@ -69,10 +74,13 @@ namespace MCN.WebAPI
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 //opt.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.All;
             });
-            
 
-            new RepositoryBALRep(services, Configuration);
-            new DefaultRep().SetInjuctions(services);
+
+
+            services.AddScoped<IUserRepositoryBL, UserRepositoryBL>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            new SqlContext(services, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

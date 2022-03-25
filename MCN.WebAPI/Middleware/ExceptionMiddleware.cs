@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using MCN.Common.AttribParam;
 using MCN.Common.Exceptions; 
-using MCN.Infrastructure.Logging; 
 using System; 
 using System.Net;
 using System.Threading.Tasks;
@@ -69,7 +68,7 @@ namespace MCN.WebAPI.Middleware
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            LockLoggingService.LockErrorLog(exception);
+            //LockLoggingService.LockErrorLog(exception);
             var json = JsonConvert.SerializeObject(new SwallResponseWrapper()
             {
                 StatusCode = 500,

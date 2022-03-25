@@ -43,7 +43,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\MCN.Common\MCN.Common.csproj" />
-    <ProjectReference Include="..\..\Core\MCN.Core.Entities.Params\MCN.Core.Entities.Params.csproj" />
     <ProjectReference Include="..\..\Core\MCN.Core.Entities\MCN.Core.Entities.csproj" />
   </ItemGroup>
 

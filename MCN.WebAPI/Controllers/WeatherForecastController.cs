@@ -27,7 +27,7 @@ namespace MCN.WebAPI.Controllers
             }
             catch (Exception exc)
             {
-                MCN.Infrastructure.Logging.LockLoggingService.LockErrorLog(exc);
+                //MCN.Infrastructure.Logging.LockLoggingService.LockErrorLog(exc);
             }
         }
         [HttpGet]
@@ -46,7 +46,7 @@ namespace MCN.WebAPI.Controllers
             }
             catch (Exception exc)
             {
-                MCN.Infrastructure.Logging.LockLoggingService.LockErrorLog(exc);
+                //MCN.Infrastructure.Logging.LockLoggingService.LockErrorLog(exc);
                 return null;
             }
         }
