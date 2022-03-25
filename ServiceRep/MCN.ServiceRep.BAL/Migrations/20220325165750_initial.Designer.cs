@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MCN.ServiceRep.BAL.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20211106175855_interestsAndLocation")]
-    partial class interestsAndLocation
+    [Migration("20220325165750_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,64 +20,6 @@ namespace MCN.ServiceRep.BAL.Migrations
                 .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("MCN.Core.Entities.Entities.Interest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("Cost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Paid")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Interest","Account");
-                });
-
-            modelBuilder.Entity("MCN.Core.Entities.Entities.Location", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Location","Account");
-                });
 
             modelBuilder.Entity("MCN.Core.Entities.Entities.User", b =>
                 {
@@ -110,14 +52,8 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
                     b.Property<int>("LoginFailureCount")
                         .HasColumnType("int");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -134,35 +70,6 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("MCN.Core.Entities.Entities.UserAuthtoken", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AccessIP")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Authtoken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("UserAuthtoken");
                 });
 
             modelBuilder.Entity("MCN.Core.Entities.Entities.UserLoginType", b =>
@@ -207,29 +114,6 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("UserMultiFactors");
-                });
-
-            modelBuilder.Entity("MCN.Core.Entities.Entities.Interest", b =>
-                {
-                    b.HasOne("MCN.Core.Entities.Entities.User", null)
-                        .WithMany("Interests")
-                        .HasForeignKey("UserID");
-                });
-
-            modelBuilder.Entity("MCN.Core.Entities.Entities.Location", b =>
-                {
-                    b.HasOne("MCN.Core.Entities.Entities.User", "User")
-                        .WithMany("Locations")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MCN.Core.Entities.Entities.UserAuthtoken", b =>
-                {
-                    b.HasOne("MCN.Core.Entities.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("MCN.Core.Entities.Entities.UserMultiFactor", b =>
