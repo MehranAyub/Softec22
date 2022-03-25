@@ -158,16 +158,9 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 UpdatedBy = DEFAULT_USERID,
                 IsEmailVerified = false,
                 UserLoginTypeId = AppConstants.UserEntityType.Applicant,//edit here 
-                Locations = new List<Location>()
+               
             };
-            usr.Locations.Add(
-                new Location
-                {
-                    Address = dto.Address,
-                    Latitude = dto.Latitude,
-                    Longitude = dto.Longitude,
-                    UserId = usr.ID
-                });
+           
 
             repositoryContext.Users.Add(usr);
             repositoryContext.SaveChanges();

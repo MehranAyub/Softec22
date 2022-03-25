@@ -1,6 +1,4 @@
 using System;
-using MCN.ServiceRep.BAL.ServicesRepositoryBL.ISearchRepositoryBL;
-using MCN.ServiceRep.BAL.ServicesRepositoryBL.Locals;
 using MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL;
 using Microsoft.Extensions.DependencyInjection; 
 
@@ -12,9 +10,9 @@ namespace MCN.ServiceRep.DepencyInjuctionInfo
         {
             try
             {
-                services.AddTransient<ILocalsRepositoryBL, LocalsRepositoryBL>();
+                //services.AddTransient<ILocalsRepositoryBL, LocalsRepositoryBL>();
                 services.AddScoped<IUserRepositoryBL, UserRepositoryBL>();
-                services.AddScoped<ISearchRepositoryBL, SearchRepositoryBL>();
+               
               
 
                 //services.AddTransient<IFormRepositoryBL, FormRepositoryBL>();

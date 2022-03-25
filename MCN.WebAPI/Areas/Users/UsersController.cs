@@ -143,17 +143,7 @@ namespace MCN.WebAPI.Areas.Users
             return Ok(result);
         }
 
-        //[HttpPost]
-        //[Route("PasswordChange")]
-        //[Authorize]
-        //public IActionResult PasswordChange([FromBody]PasswordChangeDto passwordChangeDto)
-        //{
-        //    //var user = _accessor.HttpContext.User.Claims.Select(x => x.Value).FirstOrDefault();
-        //    var email = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Email)?.Value;
-        //    passwordChangeDto.Email = email;
-        //    var result = _UserRepositoryBL.PasswordChange(passwordChangeDto);
-        //    return Ok(result);
-        //}
+     
 
         [Authorize]
         [HttpGet]
