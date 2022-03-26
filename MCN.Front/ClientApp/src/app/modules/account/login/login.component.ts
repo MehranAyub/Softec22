@@ -72,7 +72,7 @@ Login(){
   if(response.statusCode==200){
     this.isEmailVerify=true;
     this.isEmailVerifyWithAuthToken=true;
-    this.router.navigateByUrl('/job/dashboard');
+    // this.router.navigateByUrl('/job/dashboard');
     this._snackbarService.openSnack(response.swallText.html,NotificationTypeEnum.Success);  
   }
   else{

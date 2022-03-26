@@ -35,7 +35,7 @@ export class EmailVerifyComponent implements OnInit {
       this._authService.VerifyEmailPasscode(this.loginDto.passcode,this.loginDto.email).subscribe(response=>{
         console.log(response);
         if(response.statusCode==200){
-          this.router.navigateByUrl('/job/dashboard');
+          // this.router.navigateByUrl('/job/dashboard');
           this._snackbarService.openSnack(response.swallText.title,NotificationTypeEnum.Success,'top');         
         }else{
           this._snackbarService.openSnack(response.swallText.html,NotificationTypeEnum.Danger);

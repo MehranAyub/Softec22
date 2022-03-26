@@ -56,6 +56,9 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
 

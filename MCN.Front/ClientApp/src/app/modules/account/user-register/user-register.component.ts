@@ -16,7 +16,7 @@ import { AccountDataService } from '../services/accountDataService';
 export class UserRegisterComponent implements OnInit {
   createUserForm:any;
   isEmailVerify:boolean=false;
-  userCreate:User={id:0,email:'',firstName:'',gender:'',lastName:'',password:'',phoneNumber:'',loginType:LoginType.Doctor,role:Role.User,username:'',token:''};
+  userCreate:User={id:0,email:'',firstName:'',gender:'',lastName:'',password:'',phone:'',loginType:LoginType.Doctor,role:Role.User,username:'',token:''};
   constructor(private _dataService:AccountDataService ,private formBuilder: FormBuilder,private router:Router,private userService:UserService,private snackbarService:SnackBarService,private dialogService:DialogService) { 
 
     this.createUserForm=this.formBuilder.group({

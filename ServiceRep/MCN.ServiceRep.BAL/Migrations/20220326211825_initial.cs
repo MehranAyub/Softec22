@@ -32,6 +32,7 @@ namespace MCN.ServiceRep.BAL.Migrations
                     LastName = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     IsEmailVerified = table.Column<bool>(nullable: false),
+                    Phone = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: true),
                     LoginFailureCount = table.Column<int>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: true),

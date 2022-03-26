@@ -16,6 +16,7 @@ namespace MCN.Core.Entities.Entities
         public string LastName { get; set; }
         public string Gender { get; set; }
         public bool IsEmailVerified { get; set; }
+        public string Phone { get; set; }
         public bool? IsActive { get; set; }
         public int LoginFailureCount { get; set; }
         public DateTime? CreatedOn { get; set; }

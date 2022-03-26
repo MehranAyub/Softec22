@@ -157,8 +157,9 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 Password = dto.Password,
                 UpdatedBy = DEFAULT_USERID,
                 IsEmailVerified = false,
-                UserLoginTypeId = AppConstants.UserEntityType.Applicant,//edit here 
-               
+                Phone=dto.Phone,
+                UserLoginTypeId =Convert.ToInt32(dto.UserLoginTypeId)
+
             };
            
 
@@ -375,7 +376,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
 
         public User GetUser(int userID)
         {
-            var user = repositoryContext.Users.FirstOrDefault(x => x.ID == userID && x.UserLoginTypeId == AppConstants.UserEntityType.Applicant);
+            var user = repositoryContext.Users.FirstOrDefault(x => x.ID == userID && x.UserLoginTypeId == AppConstants.UserEntityType.Doctor);
 
             return user;
         }

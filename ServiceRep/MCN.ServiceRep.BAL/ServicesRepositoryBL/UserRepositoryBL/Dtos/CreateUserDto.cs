@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static MCN.Common.AppConstants;
 
 namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL.Dtos
 {
@@ -18,5 +19,6 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL.Dtos
         public string IpAddress { get; set; }
         public Double Latitude { get; set; } 
         public Double Longitude { get; set; }
+        public UserEntityType UserLoginTypeId { get; set; }
     }
 }

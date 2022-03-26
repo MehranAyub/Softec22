@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MCN.ServiceRep.BAL.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20220325165750_initial")]
+    [Migration("20220326211825_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,9 @@ namespace MCN.ServiceRep.BAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UpdatedBy")

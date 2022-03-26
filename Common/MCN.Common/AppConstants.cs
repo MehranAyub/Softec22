@@ -59,8 +59,8 @@
 
         public class UserEntityType
         {
-            public static int AdminOffice = 2;
-            public static int Applicant = 3;
+            public static int Patient = 1;
+            public static int Doctor = 2;
         }
 
         public class GlobalSettings
