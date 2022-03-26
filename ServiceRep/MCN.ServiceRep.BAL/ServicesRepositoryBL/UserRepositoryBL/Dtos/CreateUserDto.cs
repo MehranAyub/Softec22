@@ -19,6 +19,6 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL.Dtos
         public string IpAddress { get; set; }
         public Double Latitude { get; set; } 
         public Double Longitude { get; set; }
-        public UserEntityType UserLoginTypeId { get; set; }
+        public UserEntityType LoginType { get; set; }
     }
 }

@@ -158,7 +158,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 UpdatedBy = DEFAULT_USERID,
                 IsEmailVerified = false,
                 Phone=dto.Phone,
-                UserLoginTypeId =Convert.ToInt32(dto.UserLoginTypeId)
+                UserLoginTypeId =Convert.ToInt32(dto.LoginType)
 
             };
            
