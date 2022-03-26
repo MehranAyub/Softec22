@@ -7,11 +7,17 @@ export interface User {
     password?: string;
     firstName?: string;
     lastName?: string;
+    phoneNumber?:string;
+    loginType?:LoginType
     gender?:string;
     role?: Role; 
     token?:string; 
 }
 
+export enum LoginType{
+    Patient=1,
+    Doctor=2
+}
 export class UserToken{
     constructor(user:User,token:string){
         this.user=user;

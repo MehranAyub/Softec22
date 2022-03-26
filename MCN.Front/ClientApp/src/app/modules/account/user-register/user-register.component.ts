@@ -4,7 +4,7 @@ import { UserService } from '../userServices/user.service';
 import { SnackBarService, NotificationTypeEnum } from 'src/app/shared/snack-bar.service';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/shared/services/common/dialog.service';
-import { User } from '../models/user';
+import { LoginType, User } from '../models/user';
 import { Role } from '../models/role';
 import { AccountDataService } from '../services/accountDataService';
 
@@ -16,12 +16,13 @@ import { AccountDataService } from '../services/accountDataService';
 export class UserRegisterComponent implements OnInit {
   createUserForm:any;
   isEmailVerify:boolean=false;
-  userCreate:User={id:0,email:'',firstName:'',gender:'',lastName:'',password:'',role:Role.User,username:'',token:''};
+  userCreate:User={id:0,email:'',firstName:'',gender:'',lastName:'',password:'',phoneNumber:'',loginType:LoginType.Doctor,role:Role.User,username:'',token:''};
   constructor(private _dataService:AccountDataService ,private formBuilder: FormBuilder,private router:Router,private userService:UserService,private snackbarService:SnackBarService,private dialogService:DialogService) { 
 
     this.createUserForm=this.formBuilder.group({
       firstName:['',[Validators.required]],
       lastName:['',[Validators.required]],
+      phoneNumber:['',[Validators.required]],      
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required]],
       confirmPassword:['',[Validators.required]]
