@@ -23,21 +23,23 @@
     </a>
     </div>
     <ul class="main-nav">
-    <li>
+    <li *ngIf="this.appointmentDto.userLoginTypeId==1">
         
     <a routerLink="/appointment/search-doctor">Book Appointment</a>
 </li>
-<li class="has-submenu">
+<li class="has-submenu" *ngIf="this.appointmentDto.userLoginTypeId==2">
     <a >Doctors <i class="fas fa-chevron-down"></i></a>
     <ul class="submenu">
     <li routerLink="/doctor/appointments"><a >Search Appointments</a></li>
     </ul>
  </li>
 
-<li class="has-submenu">
+<li class="has-submenu" *ngIf="this.appointmentDto.userLoginTypeId==1">
 <a >Patients <i class="fas fa-chevron-down"></i></a>
 <ul class="submenu">
 <li><a routerLink="/appointment/search-doctor">Search Doctor</a></li>
+<li><a routerLink="/appointment/patient-appointments">View Appointments</a></li>
+
 </ul>
 </li>
     <li class="login-link" *ngIf="user">
@@ -53,8 +55,8 @@
     <a class="nav-link header-login" >Login </a>
     </li>
 
-    <li class="nav-item" *ngIf="!!user" (click)="logout()">
-        <a class="nav-link header-login" >Logout </a>
+    <li class="nav-item" *ngIf="!!user" >
+        <a (click)="logout()" class="nav-link header-login" >Logout </a>
         </li>
     </ul>
     </nav>

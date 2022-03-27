@@ -228,5 +228,34 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
                 };
             }
         }
+
+
+        public SwallResponseWrapper GetPatientAppointments(int patientId)
+        {
+            try
+            {
+                var record = (from app in repositoryContext.Appointment
+                              join user in repositoryContext.Users on app.PatientId equals user.ID
+                              where app.PatientId == patientId
+                              select user).ToList();
+
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = record
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 404,
+                    Data = null
+                };
+            }
+        }
+
     }
 }

@@ -23,18 +23,18 @@
         </a>
         </div>
         <ul class="main-nav">
-        <li>
+        <li *ngIf="this.appointmentDto.userLoginTypeId==1">
             
         <a routerLink="/appointment/search-doctor">Book Appointment</a>
     </li>
-    <li class="has-submenu">
+    <li class="has-submenu" *ngIf="this.appointmentDto.userLoginTypeId==2">
         <a >Doctors <i class="fas fa-chevron-down"></i></a>
         <ul class="submenu">
         <li><a >Search Appointments</a></li>
         </ul>
      </li>
     
-    <li class="has-submenu">
+    <li class="has-submenu" *ngIf="this.appointmentDto.userLoginTypeId==1">
     <a >Patients <i class="fas fa-chevron-down"></i></a>
     <ul class="submenu">
     <li><a routerLink="/appointment/search-doctor">Search Doctor</a></li>

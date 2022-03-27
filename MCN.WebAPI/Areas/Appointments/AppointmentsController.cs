@@ -113,5 +113,17 @@ namespace MCN.WebAPI.Areas.Appointments
             return Ok(result);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetPatientAppointments")]
+        public IActionResult GetPatientAppointments(int id)
+        {
+
+            var result = _AppointmentRepositoryBL.GetPatientAppointments(id);
+
+
+            return Ok(result);
+        }
+
     }
 }

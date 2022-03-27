@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/_helpers/auth.guard';
 import { AppointmentComponent } from './appointment.component';
 import { BookingSuccessComponent } from './pages/booking-success/booking-success.component';
+import { PatientAppointmentsComponent } from './pages/patient-appointments/patient-appointments.component';
 import { SearchDoctorComponent } from './pages/search-doctor/search-doctor.component';
 import { CheckoutComponent } from './pages/timeslot/checkout.component';
 
@@ -29,6 +30,11 @@ const routes: Routes = [
     {
       path: 'booking-success',
       component: BookingSuccessComponent,      
+      canActivate:[AuthGuard]
+    },
+    {
+      path: 'patient-appointments',
+      component: PatientAppointmentsComponent,      
       canActivate:[AuthGuard]
     }
 ]

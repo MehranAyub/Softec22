@@ -7,10 +7,11 @@ import { SearchDoctorComponent } from './pages/search-doctor/search-doctor.compo
 import { CheckoutComponent } from './pages/timeslot/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookingSuccessComponent } from './pages/booking-success/booking-success.component';
+import { PatientAppointmentsComponent } from './pages/patient-appointments/patient-appointments.component';
 
 
 @NgModule({
-  declarations: [AppointmentComponent, SearchDoctorComponent, CheckoutComponent, BookingSuccessComponent],
+  declarations: [AppointmentComponent, SearchDoctorComponent, CheckoutComponent, BookingSuccessComponent, PatientAppointmentsComponent],
   imports: [
     CommonModule,
     FormsModule,

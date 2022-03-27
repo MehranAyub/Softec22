@@ -47,6 +47,11 @@ GetAppointments(id): Observable<any> {
   return this.apiService.get('Appointments/GetAppointments',this.paramss);
 }
 
+GetPatientAppointments(id): Observable<any> {
+  this.paramss = new HttpParams().set('id',id)
+  return this.apiService.get('Appointments/GetPatientAppointments',this.paramss);
+}
+
 
 }
 
@@ -70,6 +75,7 @@ export interface AppointmentDto{
    email:string;
    description?:string
    doctorId?:number;
+   userLoginTypeId?:number
 }
 
 export class SpecialitiesDto
