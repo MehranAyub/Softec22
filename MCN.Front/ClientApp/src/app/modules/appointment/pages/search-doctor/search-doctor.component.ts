@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppointmentService } from '../../services/appointment.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AppointmentService } from '../../services/appointment.service';
 })
 export class SearchDoctorComponent implements OnInit {
 
-  constructor(private appointmentService:AppointmentService) { }
+  constructor(private appointmentService:AppointmentService,private router:Router) { }
 
   ngOnInit(): void {
     this.search();
@@ -24,10 +25,10 @@ export class SearchDoctorComponent implements OnInit {
   }
 
   bookAppointment(id){
-
+    this.router.navigate(['/appointment/checkout'], { queryParams: { doctorId: id }});
   }
 
   viewProfile(id){
-    
+
   }
 }

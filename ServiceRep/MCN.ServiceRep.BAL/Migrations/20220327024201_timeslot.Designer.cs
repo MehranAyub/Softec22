@@ -4,14 +4,16 @@ using MCN.ServiceRep.BAL.ContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MCN.ServiceRep.BAL.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220327024201_timeslot")]
+    partial class timeslot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,18 +187,49 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.Property<int?>("AppointmentId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TimeSlots")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Slot1")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot10")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot11")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot12")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot2")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot3")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot4")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot5")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot6")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot7")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot8")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("Slot9")
+                        .HasColumnType("bit");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("AppointmentId");
 
                     b.ToTable("TimeSlot");
                 });
@@ -219,13 +252,6 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.HasOne("MCN.Core.Entities.Entities.appointment.Specialist", "Specialist")
                         .WithMany()
                         .HasForeignKey("SpecialistId");
-                });
-
-            modelBuilder.Entity("MCN.Core.Entities.Entities.appointment.TimeSlot", b =>
-                {
-                    b.HasOne("MCN.Core.Entities.Entities.appointment.Appointment", "Appointment")
-                        .WithMany()
-                        .HasForeignKey("AppointmentId");
                 });
 #pragma warning restore 612, 618
         }

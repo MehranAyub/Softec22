@@ -42,6 +42,42 @@ namespace MCN.WebAPI.Areas.Appointments
 
                 return Ok(result);
             }
-         
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("RegisterAppointment")]
+        public IActionResult RegisterAppointment([FromBody] AppointmentDto searchDoctorFilterDto)
+        {
+
+            var result = _AppointmentRepositoryBL.RegisterAppointment(searchDoctorFilterDto);
+
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("RegisterTimeSlot")]
+        public IActionResult RegisterTimeSlot([FromBody] AppointmentDto searchDoctorFilterDto)
+        {
+
+            var result = _AppointmentRepositoryBL.RegisterTimeSlot(searchDoctorFilterDto);
+
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetDoctor")]
+        public IActionResult GetDoctor(int id)
+        {
+
+            var result = _AppointmentRepositoryBL.GetDoctor(id);
+
+
+            return Ok(result);
+        }
+
     }
 }

@@ -1,0 +1,110 @@
+
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+    <div class="row align-items-center">
+    <div class="col-md-12 col-12">
+    <nav aria-label="breadcrumb" class="page-breadcrumb">
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a >Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+    </ol>
+    </nav>
+    <h2 class="breadcrumb-title">Checkout</h2>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div class="content">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-7 col-lg-8">
+    <div class="card">
+    <div class="card-body">
+    
+    <form >
+    
+    <div class="info-widget">
+    <h4 class="card-title">Personal Information  </h4>
+    <div class="row">
+    <div class="col-md-6 col-sm-12">
+    <div class="form-group card-label">
+    <label>First Name</label>
+    <input class="form-control" [(ngModel)]="appointmentDto.firstName" name="firstName"  type="text">
+    </div>
+    </div> 
+    <div class="col-md-6 col-sm-12">
+    <div class="form-group card-label">
+    <label>Last Name</label>
+    <input class="form-control" [(ngModel)]="appointmentDto.lastName" name="lastName" type="text">
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+    <div class="form-group card-label">
+    <label>Email</label>
+    <input class="form-control" [(ngModel)]="appointmentDto.email" name="email"  type="email">
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+    <div class="form-group card-label">
+    <label>Phone</label>
+    <input class="form-control" [(ngModel)]="appointmentDto.phone" name="phone"  type="text">
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+    <div class="filter-widget">
+        <div >
+        <input type="date" class="form-control " name="date" [(ngModel)]="appointmentDto.Date" placeholder="Select Date">
+        </div>
+        </div>
+</div>
+    <div class=" col-md-6 col-sm-12">
+        <div class="form-group  card-label">
+        <select class="form-control select" name="timeSlot" [(ngModel)]="appointmentDto.SelectTimeSlot" >
+            <option [value]="0">-- Select Time Slot --</option>
+        <option *ngFor="let item of timeSlots" [value]="item.id">{{item.time}}</option>
+        </select>
+        </div>
+        </div>
+
+    </div>
+    <div ><button  class="btn btn-block btn-primary"  (click)="registerTimeSlot()">Register Appointment</button></div>
+    </div>
+     
+    </form>
+    
+    </div>
+    </div>
+    </div>
+    <div class="col-md-5 col-lg-4 theiaStickySidebar">
+    
+    <div class="card booking-card">
+    <div class="card-header">
+    <h4 class="card-title">Booking Summary</h4>
+    </div>
+    <div class="card-body">
+    
+    <div class="booking-doc-info">
+    <a class="booking-doc-img">
+    <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+    </a>
+    <div class="booking-info">
+    <h4><a >Dr. {{doctor?.firstName}} {{doctor?.lastName}}</a></h4>
+    
+    <div class="clinic-details">
+    <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor?.address}}</p>
+    <p class="doc-location"><i class="fas fa-phone-alt"></i> {{doctor?.phone}}</p>
+    <p class="doc-location"><i class="fas fa-mail-alt"></i> {{doctor?.email}}</p>
+    </div>
+    </div>
+    </div>
+     
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    

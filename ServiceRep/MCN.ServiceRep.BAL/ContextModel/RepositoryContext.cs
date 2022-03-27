@@ -24,6 +24,8 @@ namespace MCN.ServiceRep.BAL.ContextModel
         public virtual DbSet<UserLoginType> UserLoginType { get; set; }
         public virtual DbSet<Specialist> Specialist { get; set; }
         public virtual DbSet<DoctorSpecialist> DoctorSpecialist { get; set; }
+        public virtual DbSet<Appointment> Appointment { get; set; }
+        public virtual DbSet<TimeSlot> TimeSlot { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
