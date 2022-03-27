@@ -39,7 +39,7 @@
 
     <div class="form-group card-label">
     <label >Phone Number  </label> 
-        <input type="text" class="form-control " id="phone" name="phone" formControlName="phone"  required>
+        <input type="text" class="form-control " id="phone" name="phone" formControlName="phone" [maxLength]="11"  required>
         <control-messages [control]="createUserForm.get('phone')"></control-messages>
     </div> 
     

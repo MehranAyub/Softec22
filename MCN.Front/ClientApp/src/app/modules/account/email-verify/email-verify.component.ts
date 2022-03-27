@@ -40,7 +40,7 @@ export class EmailVerifyComponent implements OnInit {
           if(response?.data?.user.userLoginTypeId==LoginType.Patient){
             this.router.navigateByUrl('/appointment/search-doctor');
           }else{
-            this.router.navigateByUrl('/appointment/search-doctor');
+            this.router.navigateByUrl('/doctor/profile');
           }
           this._snackbarService.openSnack(response.swallText.title,NotificationTypeEnum.Success,'top');         
         }else{

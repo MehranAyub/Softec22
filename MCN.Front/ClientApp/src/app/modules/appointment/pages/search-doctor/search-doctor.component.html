@@ -26,63 +26,20 @@
         </div>
         <div class="card-body">
         <div class="filter-widget">
-        <div class="cal-icon">
-        <input type="text" class="form-control datetimepicker" placeholder="Select Date">
+        <div class="">
+        <input type="text" class="form-control" #keywordVal (keyup)="keyUpEvent(keywordVal.value)" placeholder="Type any keyword">
         </div>
         </div>
-        <div class="filter-widget">
-        <h4>Gender</h4>
-        <div>
-        <label class="custom_check">
-        <input type="checkbox" name="gender_type" checked>
-        <span class="checkmark"></span> Male Doctor
-        </label>
-        </div>
-        <div>
-        <label class="custom_check">
-        <input type="checkbox" name="gender_type">
-        <span class="checkmark"></span> Female Doctor
-        </label>
-        </div>
-        </div>
+     
         <div class="filter-widget">
         <h4>Select Specialities</h4>
-        <div>
+        <div *ngFor="let item of specialities">
         <label class="custom_check">
-        <input type="checkbox" name="select_specialist" checked>
-        <span class="checkmark"></span> Urology
+        <input type="checkbox" name="select_specialist" name="select_specialist" [checked]="item?.isChecked" (change)="onCheckboxChange($event,item)">
+        <span class="checkmark"></span> {{item?.name}}
         </label>
         </div>
-        <div>
-        <label class="custom_check">
-        <input type="checkbox" name="select_specialist" checked>
-        <span class="checkmark"></span> Neurology
-        </label>
-        </div>
-        <div>
-        <label class="custom_check">
-        <input type="checkbox" name="select_specialist">
-        <span class="checkmark"></span> Dentist
-        </label>
-        </div>
-        <div>
-        <label class="custom_check">
-        <input type="checkbox" name="select_specialist">
-        <span class="checkmark"></span> Orthopedic
-        </label>
-        </div>
-        <div>
-        <label class="custom_check">
-        <input type="checkbox" name="select_specialist">
-        <span class="checkmark"></span> Cardiologist
-        </label>
-        </div>
-        <div>
-        <label class="custom_check">
-        <input type="checkbox" name="select_specialist">
-        <span class="checkmark"></span> Cardiologist
-        </label>
-        </div>
+       
         </div>
         <div class="btn-search">
         <button type="button" class="btn btn-block" (click)="search()">Search</button>
@@ -104,10 +61,12 @@
         </div>
         <div class="doc-info-cont">
         <h4 class="doc-name"><a href="doctor-profile.html">Dr. {{item?.firstName}} {{item?.lastName}}</a></h4>
-        <p class="doc-speciality">{{item?.description}}</p>
+        <!-- <p class="doc-speciality">{{item?.description}}</p> -->
        
         <div class="clinic-details">
-        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Florida, USA</p>
+        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{item?.address}}</p>
+        <p class="doc-location"><i class="fas fa-envelope"></i> {{item?.email}}</p>
+        <p class="doc-location"><i class="fas fa-phone"></i> {{item?.phone}}</p>
        
         </div>
         <div class="clinic-services">
