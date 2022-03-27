@@ -24,10 +24,7 @@
   </div>
  
  
-
-  <div class="text-right">
-  <a class="forgot-link" >Forgot Password ?</a>
-  </div>
+ 
   <button [class.disabled]="!isLoading && !(username.valid && !!isEmailValidate)"  (click)="OnVerifyEmailAddress()" class="btn btn-primary btn-block btn-lg login-btn" type="submit">
     <i *ngIf="isLoading" class='fa fa-circle-o-notch fa-spin'></i> {{isLoading ? 'Logging in...' : 'Login'}}</button>
   <div class="login-or">
@@ -59,9 +56,7 @@
     
    
     </div>
-    <div class="text-right">
-    <a class="forgot-link" >Forgot Password ?</a>
-    </div>
+ 
     <button [class.disabled]="!isLoading && !(username.valid && !!isEmailValidate && passcode.valid && passcode?.value?.length>=4)"
       (click)="Login()" class="btn btn-primary btn-block btn-lg login-btn" type="submit"><i *ngIf="isLoading" class='fa fa-circle-o-notch fa-spin'></i> {{isLoading ? 'Logging in...' : 'Login'}}</button>
     <div class="login-or">

@@ -23,17 +23,32 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
         }
 
         public SwallResponseWrapper searchDoctors(SearchDoctorFilterDto search)
-        {  
-            var data = (from DS in repositoryContext.DoctorSpecialist.Where(x => search.SpecialistId.Contains((int)x.SpecialistId))
-                                join u in repositoryContext.Users.Where(x => (x.Description.Contains(search.Keyword) || x.FirstName.Contains(search.Keyword) || x.LastName.Contains(search.Keyword) && x.UserLoginTypeId== UserEntityType.Doctor)) on DS.DoctorId equals u.ID
-                                join s in repositoryContext.Specialist on DS.SpecialistId equals s.ID
+        {
+            var doctorSpecialities = repositoryContext.DoctorSpecialist.AsQueryable();
+            var users = repositoryContext.Users.Where(x=>x.UserLoginTypeId == UserEntityType.Doctor).AsQueryable();
+            if (search.SpecialistId.Length > 0)
+            {
+                 doctorSpecialities = doctorSpecialities.Where(x => search.SpecialistId.Contains((int)x.SpecialistId));
+
+            }
+
+            if (search.Keyword.Length > 0)
+            {
+                users= users.Where(x => (x.Description.Contains(search.Keyword) || x.FirstName.Contains(search.Keyword) || x.LastName.Contains(search.Keyword)));
+            }
+            var data = (from DS in doctorSpecialities
+                        join u in users on DS.DoctorId equals u.ID
+                        join s in repositoryContext.Specialist on DS.SpecialistId equals s.ID
                                 select new
                                 {
                                     id=u.ID,
                                     FirstName=u.FirstName,
                                     LastName=u.LastName,
                                     Description=u.Description,
-                                    Email=u.Email,
+                                    Address=u.Address,
+                                    Latitude = u.Latitude,
+                                    Longitude = u.Longitude,
+                                    Email =u.Email,
                                     Phone=u.Phone,
                                     Specialisty= new {Name=s.Name}
                                 }).ToList();

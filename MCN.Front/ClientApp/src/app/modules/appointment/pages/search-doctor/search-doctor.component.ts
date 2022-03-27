@@ -16,7 +16,7 @@ export class SearchDoctorComponent implements OnInit {
   }
   doctors:any[]=[];
   search(){
-    this.appointmentService.GetDoctors({Keyword:'',PageNumber:1,PageSize:10,SpecialistId:[4,2]}).subscribe((res)=>{
+    this.appointmentService.GetDoctors({Keyword:'',PageNumber:1,PageSize:10,SpecialistId:[]}).subscribe((res)=>{
       console.log(res);
       if(res?.data?.length>0){
         this.doctors=res?.data;
