@@ -130,6 +130,88 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
             }
         }
 
+        public SwallResponseWrapper GetSpecialities()
+        {
+            try
+            {
+                var record = repositoryContext.Specialist.ToList();
 
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = record
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 404,
+                    Data = null
+                };
+            }
+        }
+
+
+        public SwallResponseWrapper SaveSpecialities(SpecialitiesDto specialitiesDto)
+        {
+            try
+            {
+                foreach(var item in specialitiesDto.DoctorSpecialitiesDtos)
+                {
+                    var obj = new DoctorSpecialist();
+                    obj.DoctorId = item.DoctorId;
+                    obj.SpecialistId = item.SpecialistId;
+                    repositoryContext.DoctorSpecialist.Add(obj);
+                } 
+                repositoryContext.SaveChanges();
+
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = null
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 404,
+                    Data = null
+                };
+            }
+        }
+
+
+        public SwallResponseWrapper GetAppointments(int doctorid)
+        {
+            try
+            {
+                var record = (from app in repositoryContext.Appointment
+                              join user in repositoryContext.Users on app.PatientId equals user.ID
+                              where app.DoctorId == doctorid && user.UserLoginTypeId == UserEntityType.Patient
+                              select user).ToList();
+
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = record
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 404,
+                    Data = null
+                };
+            }
+        }
     }
 }

@@ -79,5 +79,39 @@ namespace MCN.WebAPI.Areas.Appointments
             return Ok(result);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetSpecialities")]
+        public IActionResult GetSpecialities()
+        { 
+            var result = _AppointmentRepositoryBL.GetSpecialities(); 
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("SaveSpecialities")]
+        public IActionResult SaveSpecialities([FromBody]SpecialitiesDto specialitiesDto)
+        {
+
+            var result = _AppointmentRepositoryBL.SaveSpecialities(specialitiesDto);
+
+
+            return Ok(result);
+        }
+         
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetAppointments")]
+        public IActionResult GetAppointments(int id)
+        {
+
+            var result = _AppointmentRepositoryBL.GetAppointments(id);
+
+
+            return Ok(result);
+        }
+
     }
 }

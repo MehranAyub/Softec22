@@ -33,6 +33,21 @@ GetDoctor(id): Observable<any> {
   this.paramss = new HttpParams().set('id',id)
   return this.apiService.get('Appointments/GetDoctor',this.paramss);
 }
+
+GetSpecialities(): Observable<any> { 
+  return this.apiService.get('Appointments/GetSpecialities');
+}
+
+SaveSpecialities(model:SpecialitiesDto): Observable<any> {
+  return this.apiService.post('Appointments/SaveSpecialities',model);
+}
+
+GetAppointments(id): Observable<any> {
+  this.paramss = new HttpParams().set('id',id)
+  return this.apiService.get('Appointments/GetAppointments',this.paramss);
+}
+
+
 }
 
 export interface SearchDoctorFilterDto{
@@ -53,7 +68,21 @@ export interface AppointmentDto{
    lastName:string;
    phone:string;
    email:string;
+   description?:string
+   doctorId?:number;
 }
+
+export class SpecialitiesDto
+{
+    DoctorSpecialitiesDtos:any[]
+
+}
+
+export class DoctorSpecialitiesDto{
+   DoctorId:number
+   SpecialistId:number
+}
+
 export enum TimeSlots{
 
   Slot1=1,
@@ -66,4 +95,9 @@ export enum TimeSlots{
   Slot8=8,
   Slot9=9,
   Slot10=10,
+}
+export interface specialities{
+  id:number;
+  name:string;
+  isChecked:boolean;
 }
