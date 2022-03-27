@@ -24,6 +24,7 @@ namespace MCN.Core.Entities.Entities
         public DateTime? UpdatedOn { get; set; }
         public int? UpdatedBy { get; set; }
         public int? UserLoginTypeId { get; set; }
+        public string Description { get; set; }
     }
 
 

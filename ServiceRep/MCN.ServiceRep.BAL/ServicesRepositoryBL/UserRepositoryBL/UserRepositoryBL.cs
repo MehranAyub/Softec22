@@ -16,21 +16,15 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
 {
     public class UserRepositoryBL : BaseRepository, IUserRepositoryBL
     {
-        // private readonly IEmailLogRepositoryBL _emailrepo;
         private readonly SwallResponseWrapper _swallResponseWrapper;
         private readonly SwallText _swallText;
-        // private readonly ForgotPasswordEmailDTO _ForgotPasswordEmailDTO;
-        // private readonly IAutoCodeNumberRepositoryBL _autoCodeNumberRepositoryBL;
         public static int DEFAULT_USERID = 1;
 
         public UserRepositoryBL(RepositoryContext repository) : base(repository)
         {
             _swallResponseWrapper = new SwallResponseWrapper();
             _swallText = new SwallText();
-            //_autoCodeNumberRepositoryBL = autoCodeNumberRepositoryBL;
             repositoryContext = repository;
-            //_emailrepo = emailrepo;
-            //_ForgotPasswordEmailDTO = new ForgotPasswordEmailDTO();
         }
 
 

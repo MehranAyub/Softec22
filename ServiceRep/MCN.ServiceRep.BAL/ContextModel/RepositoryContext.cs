@@ -1,5 +1,6 @@
 ﻿using System;
 using MCN.Core.Entities.Entities;
+using MCN.Core.Entities.Entities.appointment;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata; 
 
@@ -21,6 +22,8 @@ namespace MCN.ServiceRep.BAL.ContextModel
         //public virtual DbSet<UserAuthtoken> UserAuthtoken { get; set; }
         public virtual DbSet<UserMultiFactor> UserMultiFactors { get; set; }
         public virtual DbSet<UserLoginType> UserLoginType { get; set; }
+        public virtual DbSet<Specialist> Specialist { get; set; }
+        public virtual DbSet<DoctorSpecialist> DoctorSpecialist { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

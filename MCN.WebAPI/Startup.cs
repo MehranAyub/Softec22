@@ -15,6 +15,7 @@ using MCN.ServiceRep.BAL.Common;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Http;
+using MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs;
 
 namespace MCN.WebAPI
 {
@@ -78,6 +79,7 @@ namespace MCN.WebAPI
 
 
             services.AddScoped<IUserRepositoryBL, UserRepositoryBL>();
+            services.AddScoped<IAppointmentRepositoryBL, AppointmentRepositoryBL>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             new SqlContext(services, Configuration);
