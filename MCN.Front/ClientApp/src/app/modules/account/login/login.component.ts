@@ -8,6 +8,7 @@ import { SnackBarService, NotificationTypeEnum } from 'src/app/shared/snack-bar.
 import { DialogService } from 'src/app/shared/services/common/dialog.service';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { AccountDataService } from '../services/accountDataService';
+import { LoginType } from '../models/user';
 
 @Component({
   selector: 'app-login',
@@ -72,7 +73,11 @@ Login(){
   if(response.statusCode==200){
     this.isEmailVerify=true;
     this.isEmailVerifyWithAuthToken=true;
-    // this.router.navigateByUrl('/job/dashboard');
+    if(response?.data?.user.userLoginTypeId==LoginType.Patient){
+      this.router.navigateByUrl('/appointment/search-doctor');
+    }else{
+      this.router.navigateByUrl('/appointment/search-doctor');
+    }
     this._snackbarService.openSnack(response.swallText.html,NotificationTypeEnum.Success);  
   }
   else{

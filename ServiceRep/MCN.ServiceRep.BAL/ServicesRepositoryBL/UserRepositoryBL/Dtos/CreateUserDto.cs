@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MCN.Core.Entities.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using static MCN.Common.AppConstants;

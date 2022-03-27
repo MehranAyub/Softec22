@@ -1,20 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="content">
     <div class="container-fluid">
     <div class="row">
@@ -53,11 +38,24 @@
  
 
     <div class="form-group card-label">
-    <label for="phoneNumber" class="focus-label">Phone Number  </label> 
-        <input type="text" class="form-control " id="phoneNumber" name="phoneNumber" formControlName="phoneNumber"  required>
-        <control-messages [control]="createUserForm.get('phoneNumber')"></control-messages>
+    <label >Phone Number  </label> 
+        <input type="text" class="form-control " id="phone" name="phone" formControlName="phone"  required>
+        <control-messages [control]="createUserForm.get('phone')"></control-messages>
+    </div> 
+    
+    <div class="form-group card-label"> 
+    <label for="address"> Address  </label> 
+        <input type="text" class="form-control" id="address" name="address" (click)="searchAddress()" formControlName="address" required>
+        <control-messages [control]="createUserForm.get('address')"></control-messages>
     </div> 
 
+    <div class="form-group card-label">
+        <select class="form-control select"  formControlName="loginType"  formControlName="loginType" name="loginType">
+            <option [value]="0">Select User Type</option>
+            <option [value]="1">Patient</option>
+            <option [value]="2">Doctor</option> 
+            </select>
+        </div>  
     <div class="form-group card-label"> 
     <label for="password" class="focus-label"> Password  </label> 
         <input type="password" class="form-control " id="password" name="password" formControlName="password"  required>

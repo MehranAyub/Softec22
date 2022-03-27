@@ -2,21 +2,22 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmi
 import { GoogleMap } from '@angular/google-maps';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Marker } from '../../models/mapService';
-const marker:Marker = {
-  position: {
-    lat: 33.599239344482179,
-    lng: 73.0098210191367093,
-  },
-  title: '',
-  label:{color:'red',text:'text 123'},
-  options: {
-    animation: google.maps.Animation.DROP,
-    draggable:true,
-    icon: {
-      url: 'assets/img/PickPin.svg',
-    },
-  },
-};
+// const marker:Marker = {
+//   position: {
+//     lat: 33.599239344482179,
+//     lng: 73.0098210191367093,
+//   },
+//   title: '',
+//   label:{color:'red',text:'text 123'},
+//   options: {
+//     animation: google==undefined?'':google.maps.Animation.DROP,
+//     draggable:true,
+//     icon: {
+//       url: 'assets/img/PickPin.svg',
+//     },
+//   },
+// };
+var placeItem:any={};
 
 @Component({
   selector: 'app-search-input-by-google-map',
@@ -25,8 +26,9 @@ const marker:Marker = {
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class SearchInputByGoogleMapComponent implements AfterViewInit {
-  public placeItem:any={};
+  
   public pos:google.maps.LatLng;
+  private geoCoder;
   constructor(private _bottomSheetRef: MatBottomSheetRef<SearchInputByGoogleMapComponent>){
   }
   ngAfterViewInit(){
@@ -39,6 +41,7 @@ export class SearchInputByGoogleMapComponent implements AfterViewInit {
           mapTypeControl: false,
         }
       );
+      this.geoCoder = new google.maps.Geocoder();
       const marker = new google.maps.Marker({
         map,
         anchorPoint: new google.maps.Point(0, -29),
@@ -105,8 +108,8 @@ export class SearchInputByGoogleMapComponent implements AfterViewInit {
           map.setCenter(place.geometry.location);
         }
 
-        this.placeItem=place;
-        console.log(this.placeItem)
+        placeItem=place;
+        console.log(placeItem)
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
         marker.setDraggable(true);
@@ -177,16 +180,23 @@ export class SearchInputByGoogleMapComponent implements AfterViewInit {
 });
 
 function   geocodePosition(pos) {
-  var geocoder;
-  geocoder.geocode({
-    latLng: pos
-  }, function(responses) {
-    if (responses && responses.length > 0) {
-      console.log(responses[0].formatted_address);
-    } else {
-      console.log('NULL')
-    }
-  });
+  if (navigator.geolocation) {
+    let geocoder = new google.maps.Geocoder();
+    let latlng = new google.maps.LatLng(pos.lat(), pos.lng());
+    let request:any = { latLng: latlng };
+    geocoder.geocode(request, (results, status) => {
+      if (status == google.maps.GeocoderStatus.OK) {
+        console.log(results);
+        let result = results[2];
+        if (result != null) {
+          // this.fillInputs(result.formatted_address);
+          placeItem=result;
+        } else {
+          alert("No address available!");
+        }
+      }
+    });
+}
 }
 
   }
@@ -194,6 +204,6 @@ function   geocodePosition(pos) {
 
  
   Accept(){
-    this._bottomSheetRef.dismiss({code:'200',data:this.placeItem});    
+    this._bottomSheetRef.dismiss({code:'200',data:placeItem});    
   }
 }

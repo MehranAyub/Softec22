@@ -1,4 +1,5 @@
 ﻿using MCN.Common.AttribParam;
+using MCN.Core.Entities.Entities;
 using MCN.Core.Entities.Entities.appointment;
 using MCN.ServiceRep.BAL.ContextModel;
 using MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs.Dtos;
@@ -24,7 +25,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
         public SwallResponseWrapper searchDoctors(SearchDoctorFilterDto search)
         {  
             var data = (from DS in repositoryContext.DoctorSpecialist.Where(x => search.SpecialistId.Contains((int)x.SpecialistId))
-                                join u in repositoryContext.Users.Where(x => (x.Description.Contains(search.Keyword) || x.FirstName.Contains(search.Keyword) || x.LastName.Contains(search.Keyword) && x.UserLoginTypeId==2)) on DS.DoctorId equals u.ID
+                                join u in repositoryContext.Users.Where(x => (x.Description.Contains(search.Keyword) || x.FirstName.Contains(search.Keyword) || x.LastName.Contains(search.Keyword) && x.UserLoginTypeId== UserEntityType.Doctor)) on DS.DoctorId equals u.ID
                                 join s in repositoryContext.Specialist on DS.SpecialistId equals s.ID
                                 select new
                                 {

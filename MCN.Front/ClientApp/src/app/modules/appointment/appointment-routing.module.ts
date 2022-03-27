@@ -17,6 +17,11 @@ const routes: Routes = [
       canActivate:[AuthGuard]
     },
     {
+      path: '',
+      component: SearchDoctorComponent,
+      canActivate:[AuthGuard]
+    },
+    {
       path: 'checkout',
       component: CheckoutComponent,
       canActivate:[AuthGuard]

@@ -55,13 +55,7 @@
         {
             public static int Category = 1;
             public static int Action = 2;
-        }
-
-        public class UserEntityType
-        {
-            public static int Patient = 1;
-            public static int Doctor = 2;
-        }
+        } 
 
         public class GlobalSettings
         {

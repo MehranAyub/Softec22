@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EmailPasscodeDto } from '../models/UserLogin';
 import { SnackBarService, NotificationTypeEnum } from 'src/app/shared/snack-bar.service';
 import { AccountDataService } from '../services/accountDataService';
+import { LoginType } from '../models/user';
 
 @Component({
   selector: 'app-email-verify',
@@ -34,8 +35,13 @@ export class EmailVerifyComponent implements OnInit {
     this.loginDto.email;
       this._authService.VerifyEmailPasscode(this.loginDto.passcode,this.loginDto.email).subscribe(response=>{
         console.log(response);
-        if(response.statusCode==200){
-          // this.router.navigateByUrl('/job/dashboard');
+        if(response.statusCode==200 && response?.data?.user){
+          
+          if(response?.data?.user.userLoginTypeId==LoginType.Patient){
+            this.router.navigateByUrl('/appointment/search-doctor');
+          }else{
+            this.router.navigateByUrl('/appointment/search-doctor');
+          }
           this._snackbarService.openSnack(response.swallText.title,NotificationTypeEnum.Success,'top');         
         }else{
           this._snackbarService.openSnack(response.swallText.html,NotificationTypeEnum.Danger);

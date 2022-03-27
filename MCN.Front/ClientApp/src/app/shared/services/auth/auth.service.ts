@@ -7,6 +7,7 @@ import { ApiService } from '../common/api.service';
 import { CreateUserDto } from 'src/app/modules/account/models/UserLogin';
 import { UserToken } from 'src/app/modules/account/models/user';
 import { isNullOrUndefined } from 'util';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
 public currentUserSubject: BehaviorSubject<UserToken>;
 public currentUser: Observable<UserToken>;
 
-constructor(private http: HttpClient,private apiService:ApiService) {
+constructor(private http: HttpClient,private apiService:ApiService,private router:Router) {
     this.currentUserSubject = new BehaviorSubject<UserToken>(JSON.parse(JSON.stringify(localStorage.getItem('currentUser'))));
     this.currentUser = this.currentUserSubject.asObservable();
 }
@@ -79,5 +80,6 @@ logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next({token:'',user:{}});
+    this.router.navigate(['/account/login']);
 }
 }

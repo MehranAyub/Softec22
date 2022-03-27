@@ -144,6 +144,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 UpdatedOn = DateTime.Now,
                 CreatedBy = DEFAULT_USERID,
                 Email = dto.Email,
+                Address = dto.Address,
                 FirstName = dto.FirstName,
                 IsActive = true,
                 LastName = dto.LastName,
@@ -152,7 +153,9 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 UpdatedBy = DEFAULT_USERID,
                 IsEmailVerified = false,
                 Phone=dto.Phone,
-                UserLoginTypeId =Convert.ToInt32(dto.LoginType)
+                Latitude=dto.Latitude,
+                Longitude=dto.Longitude,
+                UserLoginTypeId =dto.LoginType
 
             };
            
@@ -370,7 +373,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
 
         public User GetUser(int userID)
         {
-            var user = repositoryContext.Users.FirstOrDefault(x => x.ID == userID && x.UserLoginTypeId == AppConstants.UserEntityType.Doctor);
+            var user = repositoryContext.Users.FirstOrDefault(x => x.ID == userID && x.UserLoginTypeId == UserEntityType.Doctor);
 
             return user;
         }

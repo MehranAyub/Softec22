@@ -71,7 +71,7 @@ namespace MCN.WebAPI.Areas.Appointments
         [AllowAnonymous]
         [Route("GetDoctor")]
         public IActionResult GetDoctor(int id)
-        {
+         {
 
             var result = _AppointmentRepositoryBL.GetDoctor(id);
 

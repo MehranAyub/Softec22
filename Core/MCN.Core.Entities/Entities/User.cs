@@ -14,6 +14,7 @@ namespace MCN.Core.Entities.Entities
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Address { get; set; }
         public string Gender { get; set; }
         public bool IsEmailVerified { get; set; }
         public string Phone { get; set; }
@@ -23,20 +24,17 @@ namespace MCN.Core.Entities.Entities
         public int? CreatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public int? UpdatedBy { get; set; }
-        public int? UserLoginTypeId { get; set; }
+        public UserEntityType UserLoginTypeId { get; set; }
         public string Description { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 
+    public enum UserEntityType
+    {
+        Patient = 1,
+        Doctor = 2
+    }
 
 }
 
-
-/*
-Category
-- Occupation
-- Interest
-
-
-SubCategory
- 
- */
