@@ -32,7 +32,7 @@ namespace MCN.ServiceRep.BAL.ContextModel
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=CYBERSPACE;Initial Catalog=softec22Db;Integrated Security=true;");
+                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog=softecDb;Integrated Security=true;");
             }
         }
       
