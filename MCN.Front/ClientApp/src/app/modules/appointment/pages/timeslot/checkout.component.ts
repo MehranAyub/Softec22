@@ -8,10 +8,10 @@ import { AppointmentDto, AppointmentService } from '../../services/appointment.s
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-
-  appointmentDto:AppointmentDto={AppointmentId:0,Date:new Date(),DoctorId:0,PatientId:0,SelectTimeSlot:0,firstName:'',lastName:'',email:'',phone:''}
+ 
+  appointmentDto:AppointmentDto={AppointmentId:0,Date:new Date(),DoctorId:0,PatientId:0,SelectTimeSlot:'',firstName:'',lastName:'',email:'',phone:''}
   constructor(private activatedRoute:ActivatedRoute,private router:Router,private appointmentService:AppointmentService) {
-
+    
     let user=JSON.parse(localStorage.getItem('currentUser'));
     if(user){
       this.appointmentDto.PatientId=user.user.id;
@@ -24,48 +24,42 @@ export class CheckoutComponent implements OnInit {
     }
     activatedRoute.queryParams.subscribe(params => {
       // this.isFromCashScreen = (params['isFromCashScreen'] == 'true');
+      let slot = (params['slots'] || 0);
+      this.Slots=slot;
+      this.appointmentDto.Date = (params['date'] || 0);
+
       let doctorId = (params['doctorId'] || 0);
+this.appointmentDto.DoctorId=doctorId;
+      doctorId[0]
       if(doctorId>0){
-        this.registerAppointment(doctorId);
+      //  this.registerAppointment(doctorId);
         this.getDoctor(doctorId);
       }
     });
    }
+   
    doctor:any={};
    getDoctor(id){
     this.appointmentService.GetDoctor(id).subscribe((res)=>{
       if(res.data){
         this.doctor=res.data;
+        this.appointmentDto.doctorId=id;
       }
     })
    }
-   registerAppointment(doctorId){
-    this.appointmentDto.DoctorId=doctorId;
+   registerAppointment(){
+    console.log('appoint method called');
+    console.log(this.appointmentDto);
      this.appointmentService.RegisterAppointment(this.appointmentDto).subscribe((res)=>{
        if(res?.data){
          this.appointmentDto.AppointmentId=(res.data.id || 0);
-       }
-     })
-   }
-
-   registerTimeSlot(){
-     this.appointmentService.RegisterTimeSlot(this.appointmentDto).subscribe((res)=>{
-       if(res?.data){
-         console.log(res);
          this.router.navigate(['/appointment/booking-success'], { queryParams: { name: this.doctor?.firstName+' '+this.doctor?.lastName }});
        }
      })
    }
 
-  timeSlots:any[]=[
-  {id:1,time:"08:00 - 08:30"},
-  {id:2,time:"08-30 - 09:00"},
-  {id:3,time:"09:00 - 09:30"},
-  {id:4,time:"09:30 - 10:00"},
-  {id:5,time:"10:00 - 10:30"},
-  {id:6,time:"10:30 - 11:00"},
-  {id:7,time:"11:00 - 11:30"},
-  {id:8,time:"11:30 - 12:00"}]
+
+ Slots:any[];
   ngOnInit(): void {
   }
 

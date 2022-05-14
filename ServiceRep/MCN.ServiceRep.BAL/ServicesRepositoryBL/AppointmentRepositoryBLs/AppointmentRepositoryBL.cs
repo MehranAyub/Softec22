@@ -6,7 +6,7 @@ using MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs.Dtos;
 using System;
 using System.Linq;
 using System.Text;
-
+using static MCN.Common.AttribParam.SwallTextData;
 namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
 {
    public class AppointmentRepositoryBL : BaseRepository, IAppointmentRepositoryBL
@@ -66,10 +66,102 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
         {
             try
             {
+                string date = appointmentDto.Date.ToString("dd-MM-yyyy");
+
+                var record = repositoryContext.AvailSlots.FirstOrDefault(x => x.Date == date && x.BarberID == appointmentDto.DoctorId);
+                var slot = new AvailSlots();
+                if (record != null)
+                {
+                    if (appointmentDto.SelectTimeSlot == "8:00 am")
+                    {
+                        record.S1 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "9:00 am")
+                    {
+                        record.S2 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "10:00 am")
+                    {
+                        record.S3 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "11:00 am")
+                    {
+                        record.S4 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "12:00 pm")
+                    {
+                        record.S5 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "01:00 pm")
+                    {
+                        record.S6 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "02:00 pm")
+                    {
+                        record.S7 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "03:00 pm")
+                    {
+                        record.S8 = 1;
+                    }
+                    repositoryContext.Update(record);
+
+                }
+                else
+                {
+                    slot.BarberID = (int)appointmentDto.DoctorId;
+                    slot.Date = date;
+                    if (appointmentDto.SelectTimeSlot == "8:00 am")
+                    {
+                        slot.S1 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "9:00 am")
+                    {
+                        slot.S2 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "10:00 am")
+                    {
+                        slot.S3 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "11:00 am")
+                    {
+                        slot.S4 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "12:00 pm")
+                    {
+                        slot.S5 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "01:00 pm")
+                    {
+                        slot.S6 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "02:00 pm")
+                    {
+                        slot.S7 = 1;
+                    }
+                    else if (appointmentDto.SelectTimeSlot == "03:00 pm")
+                    {
+                        slot.S8 = 1;
+                    }
+                    repositoryContext.AvailSlots.Add(slot);
+                }
+                
                 var app = new Appointment();
                 app.DoctorId = appointmentDto.DoctorId;
-                app.PatientId = appointmentDto.PatientId;              
+                var rec = repositoryContext.Users.FirstOrDefault(x => x.ID == appointmentDto.DoctorId);
+                app.DoctorName = rec.FirstName + ' ' + rec.LastName;
+                app.Location = rec.Address;
+                app.phone = rec.Phone;
+                app.date = date;
+                app.status = 1;
+                rec = repositoryContext.Users.FirstOrDefault(x => x.ID == appointmentDto.PatientId);
+                app.PatientId = appointmentDto.PatientId;
+                app.UserName= rec.FirstName + ' ' + rec.LastName;
+                //app.DoctorNname = appointmentDto.DoctorName;
+                //app.UserName = appointmentDto.UserName;
+                app.Time = appointmentDto.SelectTimeSlot;
                 repositoryContext.Appointment.Add(app);
+               
                 repositoryContext.SaveChanges();
 
                 return new SwallResponseWrapper()
@@ -96,7 +188,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
             {
                 var app = new TimeSlot();
                 app.DoctorId = appointmentDto.DoctorId;
-                app.TimeSlots = appointmentDto.SelectTimeSlot;
+               // app.TimeSlots = appointmentDto.SelectTimeSlot;
                 app.Date = appointmentDto.Date;
                 app.AppointmentId = appointmentDto.AppointmentId;
 
@@ -120,7 +212,79 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
                 };
             }
         }
-
+        public SwallResponseWrapper FindSlots(AppointmentDto appointmentDto)
+        {
+            try
+            {
+                var apps = new AvailSlots();
+               string date=appointmentDto.Date.ToString("dd-MM-yyyy");
+               
+                var record = repositoryContext.AvailSlots.FirstOrDefault(x => x.Date == date&&x.BarberID==appointmentDto.DoctorId);
+                if (record!=null)
+                {
+                   
+                    if (record.S1!=1)
+                    {
+                        apps.S1 = 0;
+                    }
+                    if (record.S2 != 1)
+                    {
+                        apps.S2 = 0;
+                    }
+                    if (record.S3 != 1)
+                    {
+                        apps.S3 = 0;
+                    }
+                    if (record.S4 != 1)
+                    {
+                        apps.S4 = 0;
+                    }
+                    if (record.S5 != 1)
+                    {
+                        apps.S5 = 0;
+                    }
+                    if (record.S6 != 1)
+                    {
+                        apps.S6 = 0;
+                    }
+                    if (record.S7 != 1)
+                    {
+                        apps.S7 = 0;
+                    }
+                    if (record.S8 != 1)
+                    {
+                        apps.S8 = 0;
+                    }
+                }
+                else
+                {
+                    apps.S1 = 0;
+                    apps.S2 = 0;
+                    apps.S3 = 0;
+                    apps.S4 = 0;
+                    apps.S5 = 0;
+                    apps.S6 = 0;
+                    apps.S7 = 0;
+                    apps.S8 = 0;
+                }
+               
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = apps
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 400,
+                    Data = null
+                };
+            }
+        }
         public SwallResponseWrapper GetDoctor(int id)
         {
             try
@@ -169,6 +333,66 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
             }
         }
 
+        public SwallResponseWrapper CancelAppointment(int id)
+        {
+            try
+            {
+                var app = repositoryContext.Appointment.FirstOrDefault(x=>x.ID==id);
+                var record = repositoryContext.AvailSlots.FirstOrDefault(x => x.BarberID == app.DoctorId && x.Date==app.date);
+
+                if (app.Time == "8:00 am")
+                {
+                    record.S1 = null;
+                }
+                else if (app.Time == "9:00 am")
+                {
+                    record.S2 = null;
+                }
+                else if (app.Time == "10:00 am")
+                {
+                    record.S3 = null;
+                }
+                else if (app.Time == "11:00 am")
+                {
+                    record.S4 = null;
+                }
+                else if (app.Time == "12:00 pm")
+                {
+                    record.S5 = null;
+                }
+                else if (app.Time == "01:00 pm")
+                {
+                    record.S6 = null;
+                }
+                else if (app.Time == "02:00 pm")
+                {
+                    record.S7 = null;
+                }
+                else if (app.Time == "03:00 pm")
+                {
+                    record.S8 = null;
+                }
+                repositoryContext.Update(record);
+
+                repositoryContext.Appointment.Remove(app);
+                repositoryContext.SaveChanges();
+                return new SwallResponseWrapper()
+                {
+                    SwallText = new Commons().Delete,
+                    StatusCode = 200,
+                    Data = "Done"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 404,
+                    Data = null
+                };
+            }
+        }
 
         public SwallResponseWrapper SaveSpecialities(SpecialitiesDto specialitiesDto)
         {
@@ -234,11 +458,8 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
         {
             try
             {
-                var record = (from app in repositoryContext.Appointment
-                              join user in repositoryContext.Users on app.PatientId equals user.ID
-                              where app.PatientId == patientId
-                              select user).ToList();
-
+                var record = repositoryContext.Appointment.Where(x => x.PatientId == patientId).ToList();
+              
                 return new SwallResponseWrapper()
                 {
                     SwallText = null,

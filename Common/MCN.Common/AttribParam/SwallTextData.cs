@@ -88,11 +88,11 @@ namespace MCN.Common.AttribParam
             public SwallText SwallTextRegistrationControllerSuccess = new SwallText("success", "Saved Successfully!", "");
             public SwallText SwallTextRegistrationAdminOfficeCreatedSuccessfully = new SwallText("success", "Successfull", "Admin Office Created swuccessfully");
         }
-        public class Common
+        public class Commons
         {
             public static SwallText SaveSuccess = new SwallText("success", "Saved Successfully!", "");
             public static SwallText NotSaveSuccess = new SwallText("error", "Not Save Successfully!", "");
-            public static SwallText Delete = new SwallText("success", "Deleted Successfully!", "");
+            public  SwallText Delete = new SwallText("success", "Deleted Successfully!", "");
             public static SwallText NotDelete = new SwallText("error", "Not Deleted Successfully!", "");
             public static SwallText Detail = new SwallText("success", "fetch details!", "");
             public static SwallText NotDetail = new SwallText("error", "No detail fetch!", "");

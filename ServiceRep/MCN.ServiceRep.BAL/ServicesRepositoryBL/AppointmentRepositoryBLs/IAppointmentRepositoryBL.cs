@@ -11,7 +11,10 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
         SwallResponseWrapper searchDoctors(SearchDoctorFilterDto search);
         SwallResponseWrapper RegisterAppointment(AppointmentDto appointmentDto);
         SwallResponseWrapper RegisterTimeSlot(AppointmentDto appointmentDto);
+        SwallResponseWrapper FindSlots(AppointmentDto appointmentDto);
         SwallResponseWrapper GetDoctor(int id);
+
+        SwallResponseWrapper CancelAppointment(int id);
         SwallResponseWrapper GetSpecialities();
         SwallResponseWrapper SaveSpecialities(SpecialitiesDto specialitiesDto);
         SwallResponseWrapper GetAppointments(int doctorid);

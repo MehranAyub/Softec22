@@ -29,7 +29,7 @@ export class SearchDoctorComponent implements OnInit {
   }
 
   bookAppointment(id){
-    this.router.navigate(['/appointment/checkout'], { queryParams: { doctorId: id }});
+    this.router.navigate(['/appointment/selected-day'], { queryParams: { doctorId: id }});
   }
 
   viewProfile(id){

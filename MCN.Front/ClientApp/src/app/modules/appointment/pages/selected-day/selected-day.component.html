@@ -26,47 +26,23 @@
     <form >
     
     <div class="info-widget">
-    <h4 class="card-title">Personal Information  </h4>
+    <h4 class="card-title">Select Date for Appointment  </h4>
     <div class="row">
-    <div class="col-md-6 col-sm-12">
-    <div class="form-group card-label">
-    <label>First Name</label>
-    <input class="form-control" [(ngModel)]="appointmentDto.firstName" name="firstName"  type="text">
-    </div>
-    </div> 
-    <div class="col-md-6 col-sm-12">
-    <div class="form-group card-label">
-    <label>Last Name</label>
-    <input class="form-control" [(ngModel)]="appointmentDto.lastName" name="lastName" type="text">
-    </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-    <div class="form-group card-label">
-    <label>Email</label>
-    <input class="form-control" [(ngModel)]="appointmentDto.email" name="email"  type="email">
-    </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
-    <div class="form-group card-label">
-    <label>Phone</label>
-    <input class="form-control" [(ngModel)]="appointmentDto.phone" name="phone"  type="text">
-    </div>
-    </div>
-    <div class="col-md-6 col-sm-12">
+  
     
+  
+    
+    <div class="col-md-6 col-sm-12">
+    <div class="filter-widget">
+        <div >
+        <input type="date" class="form-control " name="date" [(ngModel)]="appointmentDto.Date" placeholder="Select Date">
+        </div>
+        </div>
 </div>
-    <div class=" col-md-6 col-sm-12">
-        <div class="form-group  card-label">
-            <label>Select Time Slot</label>
-        <select class="form-control select" name="timeSlot" [(ngModel)]="appointmentDto.SelectTimeSlot" >
-           
-      <option *ngFor="let s of Slots;" [value]="s">{{s}}</option>
-        </select>
-        </div>
-        </div>
+    
 
     </div>
-    <div ><button  class="btn btn-block btn-primary"  (click)="registerAppointment()">Register Appointment</button></div>
+    <div ><button  class="btn btn-block btn-primary"  (click)="FindSlots()">Next</button></div>
     </div>
      
     </form>

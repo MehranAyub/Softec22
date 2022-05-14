@@ -42,7 +42,17 @@ namespace MCN.WebAPI.Areas.Appointments
 
                 return Ok(result);
             }
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("FindSlots")]
+        public IActionResult FindSlots([FromBody] AppointmentDto searchslot)
+        {
 
+            var result = _AppointmentRepositoryBL.FindSlots(searchslot);
+
+
+            return Ok(result);
+        }
         [HttpPost]
         [AllowAnonymous]
         [Route("RegisterAppointment")]
@@ -99,7 +109,18 @@ namespace MCN.WebAPI.Areas.Appointments
 
             return Ok(result);
         }
-         
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("CancelAppointment")]
+        public IActionResult CancelAppointment([FromBody] int id)
+        {
+
+            var result = _AppointmentRepositoryBL.CancelAppointment(id);
+
+
+            return Ok(result);
+        }
 
         [HttpGet]
         [AllowAnonymous]

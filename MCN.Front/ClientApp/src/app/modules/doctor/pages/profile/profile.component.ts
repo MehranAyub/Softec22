@@ -10,7 +10,7 @@ import { NotificationTypeEnum, SnackBarService } from 'src/app/shared/snack-bar.
 })
 export class ProfileComponent implements OnInit {
 
-  appointmentDto:AppointmentDto={AppointmentId:0,Date:new Date(),DoctorId:0,description:'',PatientId:0,doctorId:0,SelectTimeSlot:0,firstName:'',lastName:'',email:'',phone:''}
+  appointmentDto:AppointmentDto={AppointmentId:0,Date:new Date(),DoctorId:0,description:'',PatientId:0,doctorId:0,SelectTimeSlot:'',firstName:'',lastName:'',email:'',phone:''}
 
   constructor(private _appointmentService:AppointmentService,
     private _snackbarService:SnackBarService,private router:Router) {

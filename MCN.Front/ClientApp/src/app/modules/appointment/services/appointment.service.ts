@@ -28,7 +28,9 @@ RegisterAppointment(model:AppointmentDto): Observable<any> {
 RegisterTimeSlot(model:AppointmentDto): Observable<any> {
   return this.apiService.post('Appointments/RegisterTimeSlot',model);
 }
-
+FindSlots(model:AppointmentDto): Observable<any> {
+  return this.apiService.post('Appointments/FindSlots',model);
+}
 GetDoctor(id): Observable<any> {
   this.paramss = new HttpParams().set('id',id)
   return this.apiService.get('Appointments/GetDoctor',this.paramss);
@@ -51,8 +53,9 @@ GetPatientAppointments(id): Observable<any> {
   this.paramss = new HttpParams().set('id',id)
   return this.apiService.get('Appointments/GetPatientAppointments',this.paramss);
 }
-
-
+CancelAppointment(id): Observable<any> {
+  return this.apiService.post('Appointments/CancelAppointment',id);
+}
 }
 
 export interface SearchDoctorFilterDto{
@@ -66,7 +69,7 @@ export interface AppointmentDto{
    DoctorId  :number
     PatientId :number
     Date :Date
-    SelectTimeSlot :TimeSlots
+    SelectTimeSlot :string
    AppointmentId :number
 
    firstName:string;
@@ -89,21 +92,9 @@ export class DoctorSpecialitiesDto{
    SpecialistId:number
 }
 
-export enum TimeSlots{
-
-  Slot1=1,
-  Slot2=2,
-  Slot3=3,
-  Slot4=4,
-  Slot5=5,
-  Slot6=6,
-  Slot7=7,
-  Slot8=8,
-  Slot9=9,
-  Slot10=10,
-}
 export interface specialities{
   id:number;
   name:string;
   isChecked:boolean;
 }
+

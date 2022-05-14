@@ -10,7 +10,11 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs.Dtos
         public int? DoctorId { get; set; }
         public int? PatientId { get; set; }
         public DateTime Date { get; set; }
-        public TimeSlots SelectTimeSlot { get; set; }
+        public string SelectTimeSlot { get; set; }
         public int? AppointmentId { get; set; }
+
+        public string DoctorName { get; set; }
+
+        public string UserName { get; set; }
     }
 }

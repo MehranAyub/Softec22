@@ -10,7 +10,7 @@ import { AppointmentDto } from './services/appointment.service';
 })
 export class AppointmentComponent implements OnInit {
   user:UserToken;
-  appointmentDto:AppointmentDto={AppointmentId:0,Date:new Date(),DoctorId:0,PatientId:0,SelectTimeSlot:0,firstName:'',lastName:'',email:'',phone:'',userLoginTypeId:0}
+  appointmentDto:AppointmentDto={AppointmentId:0,Date:new Date(),DoctorId:0,PatientId:0,SelectTimeSlot:'',firstName:'',lastName:'',email:'',phone:'',userLoginTypeId:0}
   constructor(private auth:AuthService) {
     auth.currentUserSubject.subscribe((res)=>{
       if(res){

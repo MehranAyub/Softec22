@@ -77,7 +77,7 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserLoginTypeId")
+                    b.Property<int>("UserLoginTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -145,6 +145,50 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Appointment");
+                });
+
+            modelBuilder.Entity("MCN.Core.Entities.Entities.appointment.AvailSlots", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BarberID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("S1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("S2")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("S3")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("S4")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("S5")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("S6")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("S7")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("S8")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("BarberID");
+
+                    b.ToTable("AvailSlots");
                 });
 
             modelBuilder.Entity("MCN.Core.Entities.Entities.appointment.DoctorSpecialist", b =>
@@ -215,6 +259,15 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.HasOne("MCN.Core.Entities.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MCN.Core.Entities.Entities.appointment.AvailSlots", b =>
+                {
+                    b.HasOne("MCN.Core.Entities.Entities.User", "Users")
+                        .WithMany()
+                        .HasForeignKey("BarberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
