@@ -50,15 +50,16 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
                                     Longitude = u.Longitude,
                                     Email =u.Email,
                                     Phone=u.Phone,
-                                    Specialisty= new {Name=s.Name}
-                                }).ToList();
+                                    Specialities= (from DSS in doctorSpecialities
+                                                  join ss in repositoryContext.Specialist on DSS.SpecialistId equals ss.ID where DSS.DoctorId == u.ID select ss).ToList()
+                                }).Distinct();
 
           
                 return new SwallResponseWrapper()
                 {
                     SwallText = null,
                     StatusCode = 200,
-                    Data = data
+                    Data = data.ToList()
                 };
             } 
 
@@ -204,7 +205,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
             }
             catch (Exception ex)
             {
-                return new SwallResponseWrapper()
+                return new SwallResponseWrapper() 
                 {
                     SwallText = null,
                     StatusCode = 400,
