@@ -426,15 +426,33 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
             }
         }
 
+        public SwallResponseWrapper UpdateUser(AppointmentDto dto)
+        {
+
+            var record = repositoryContext.Users.FirstOrDefault(x => x.ID == dto.DoctorId);
+            record.FirstName = dto.firstName;
+            record.LastName = dto.lastName;
+            record.Phone = dto.phone;
+            record.UpdatedOn = DateTime.Now;
+
+            repositoryContext.Update(record);
+
+            repositoryContext.SaveChanges();
+
+
+            return new SwallResponseWrapper()
+            {
+                SwallText = LoginUser.UserCreatedScuccessfully,
+                StatusCode = 200,
+                Data = record
+            };
+        }
 
         public SwallResponseWrapper GetAppointments(int doctorid)
         {
             try
             {
-                var record = (from app in repositoryContext.Appointment
-                              join user in repositoryContext.Users on app.PatientId equals user.ID
-                              where app.DoctorId == doctorid && user.UserLoginTypeId == UserEntityType.Patient
-                              select user).ToList();
+                var record = repositoryContext.Appointment.Where(x => x.DoctorId == doctorid).ToList();
 
                 return new SwallResponseWrapper()
                 {

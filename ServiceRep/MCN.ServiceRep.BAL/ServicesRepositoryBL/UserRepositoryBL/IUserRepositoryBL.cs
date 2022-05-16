@@ -15,6 +15,8 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
         //SwallResponseWrapper ResetPassword(ChangePasswordDTO resetPassword);
         SwallResponseWrapper IsEmailVerified(string Passcode, string IpAddress, string Email);
         SwallResponseWrapper CreateUser(CreateUserDto dto);
+
+        string FileUpload(FileDto dto);
         //SwallResponseWrapper PasswordChange(PasswordChangeDto passwordChangeDto);
         SwallResponseWrapper ReGenerateEmailVerificationPasscode(CreateUserDto userDto, string IpAddress);
        // Result<UserDto> Users(UserCriteria criteria);

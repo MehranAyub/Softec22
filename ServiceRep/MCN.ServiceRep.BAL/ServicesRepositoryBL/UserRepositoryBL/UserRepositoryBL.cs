@@ -187,6 +187,8 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
             };
         }
 
+        
+
         //public SwallResponseWrapper ResetPassword(ChangePasswordDTO resetPassword)
         //{
         //    var token = repositoryContext.UserAuthtoken.Where(x => x.Authtoken == resetPassword.Token && x.AccessIP == resetPassword.IpAddress).OrderByDescending(x => x.CreatedOn).FirstOrDefault();
@@ -261,6 +263,46 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 }
                 :
                  null;
+        }
+
+
+        public string FileUpload(FileDto dto)
+        {
+
+            var obj = new Files();
+            obj.DocumentId = dto.DocumentId;
+            obj.FileType = dto.FileType;
+            obj.DataFiles = dto.DataFiles;
+            obj.Name = dto.Name;
+            obj.CreatedOn = dto.CreatedOn;
+
+            repositoryContext.Files.Add(obj);
+            repositoryContext.SaveChanges();
+
+
+            var image= "data:image/png;base64," + Convert.ToBase64String(obj.DataFiles);
+            try
+            {
+
+                return image;
+                //return new SwallResponseWrapper()
+                //{
+                //    SwallText = null,
+                //    StatusCode = 200,
+                //    Data = image
+                //};
+            }
+            catch (Exception ex)
+            {
+                return "error";
+                //return new SwallResponseWrapper()
+                //{
+                //    SwallText = null,
+                //    StatusCode = 404,
+                //    Data = ex
+                //};
+            }
+
         }
 
         public UserMultiFactor checkPasscode(string Passcode, string IpAddress, string Email)

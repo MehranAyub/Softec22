@@ -111,6 +111,17 @@ namespace MCN.WebAPI.Areas.Appointments
         }
 
         [HttpPost]
+        [Route("UpdateUser")]
+        [AllowAnonymous]
+        public IActionResult UpdateUser([FromBody] AppointmentDto dto)
+        {
+            
+            var result = _AppointmentRepositoryBL.UpdateUser(dto);
+            return Ok(result);
+        }
+
+
+        [HttpPost]
         [AllowAnonymous]
         [Route("CancelAppointment")]
         public IActionResult CancelAppointment([FromBody] int id)

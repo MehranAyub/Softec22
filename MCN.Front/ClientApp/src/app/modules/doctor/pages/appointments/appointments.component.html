@@ -30,23 +30,23 @@
     <img src="assets/img/patients/patient.jpg" alt="User Image">
     </a>
     <div class="profile-det-info">
-    <h3><a href="patient-profile.html">{{item?.firstName}} {{item?.lastName}}</a></h3>
+    <h3><a href="patient-profile.html">{{item?.userName}}</a></h3>
     <div class="patient-details">
     <!-- <h5><i class="far fa-clock"></i> 14 Nov 2019, 10.00 AM</h5> -->
-    <h5><i class="fas fa-map-marker-alt"></i> {{item?.address}}</h5>
-    <h5><i class="fas fa-envelope"></i> {{item?.email}}</h5>
+    <h5><i class="fas fa-clock"></i> {{item?.time}}</h5>
+    <h5><i class="fas fa-calendar"></i>{{item?.date}}</h5>
     <h5 class="mb-0"><i class="fas fa-phone"></i> {{item?.phone}}</h5>
     </div>
     </div>
     </div>
     <div class="appointment-action">
-    <a href="#" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
+    <a  class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
     <i class="far fa-eye"></i> View
     </a>
     <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
     <i class="fas fa-check"></i> Accept
     </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+    <a (click)="CancelAppointment(item.id)" class="btn btn-sm bg-danger-light">
     <i class="fas fa-times"></i> Cancel
     </a>
     </div>

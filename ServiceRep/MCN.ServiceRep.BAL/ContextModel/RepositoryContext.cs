@@ -26,14 +26,14 @@ namespace MCN.ServiceRep.BAL.ContextModel
         public virtual DbSet<DoctorSpecialist> DoctorSpecialist { get; set; }
         public virtual DbSet<Appointment> Appointment { get; set; }
         public virtual DbSet<TimeSlot> TimeSlot { get; set; }
-
+        public DbSet<Files> Files { get; set; }
         public virtual DbSet<AvailSlots> AvailSlots { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=(local);Initial Catalog=softecDb;Integrated Security=true;");
+                optionsBuilder.UseSqlServer("Data Source=CYBERSPACE;Initial Catalog=softec22Db;Integrated Security=true;");
             }
         }
       

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +14,11 @@ using MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL.Dtos;
 using MCN.ServiceRep.BAL.ViewModels;
 using MCN.ServiceRep.BAL.ViewModels.Login;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.IdentityModel.Tokens;
 using static MCN.Common.AttribParam.SwallTextData;
 
@@ -30,12 +34,14 @@ namespace MCN.WebAPI.Areas.Users
         private string _IpAddress;
         private string _baseuri;
         private IConfiguration _config;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public UsersController(IUserRepositoryBL UserRepositoryBL, IHttpContextAccessor accessor, IConfiguration config)
+        public UsersController(IUserRepositoryBL UserRepositoryBL, IHttpContextAccessor accessor, IConfiguration config, IHostingEnvironment env)
         {
             _UserRepositoryBL = UserRepositoryBL;
             _accessor = accessor;
             _config = config;
+            hostingEnvironment = env;
             _IpAddress = _accessor.HttpContext?.Connection?.RemoteIpAddress?.ToString(); 
         }
 
@@ -125,6 +131,94 @@ namespace MCN.WebAPI.Areas.Users
             return Ok(result);
         }
 
+        //[HttpPost]
+        //[Route("FileUpload")]
+        //[AllowAnonymous]
+        //public IActionResult FileUpload()
+        //{
+
+        //    var file = Request.Form.Files[0];
+        //    //var folderName = Path.Combine("Resources", "Images");
+        //    //var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+        //    if (file.Length > 0)
+        //    {
+        //        //var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+        //        //var fullPath = Path.Combine(pathToSave, fileName);
+        //        //var dbPath = Path.Combine(folderName, fileName);
+        //        //using (var stream = new FileStream(fullPath, FileMode.Create))
+        //        //{
+        //        //    file.CopyTo(stream);
+        //        //    return Ok(file);
+        //        //}
+        //        return Ok();
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    //var file = HttpContext.Request.Form.Files.Count > 0 ? HttpContext.Request.Form.Files[0] : null;
+        //    //if (file!=null && file.Length > 0)
+        //    //{
+        //    //    var fileName = Path.GetFileName(file.FileName);
+        //    //    var uploads = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+        //    //   // var uploads = Path.Combine(hostingEnvironment.EnvironmentName, "uploads");
+        //    //    var path = Path.Combine(uploads, fileName);
+        //    //    var stream = System.IO.File.Create(path);
+        //    //    file.CopyTo(stream);
+        //    //}
+        //    //return Ok(file);
+        //}
+
+
+        [HttpPost]
+        
+        [Route("FileUpload")]
+        [AllowAnonymous]
+        public string FileUpload()
+        {
+
+            var file = Request.Form.Files[0];
+            if (file.Length > 0)
+            {//Getting FileName
+                var fileName = Path.GetFileName(file.FileName);
+                //Getting file Extension
+                var fileExtension = Path.GetExtension(fileName);
+                // concatenating  FileName + FileExtension
+                var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+                
+
+                var objfiles = new FileDto()
+                {
+                    DocumentId = 0,
+                    Name = newFileName,
+                    FileType = fileExtension,
+                    CreatedOn = DateTime.Now
+                };
+
+                using (var target = new MemoryStream())
+                {
+                    file.CopyTo(target);
+                    objfiles.DataFiles = target.ToArray();
+                }
+
+            var response=    _UserRepositoryBL.FileUpload(objfiles);
+
+             
+
+
+                return response;
+            }
+            else
+            {
+                return "file nt found";
+            }
+
+        
+        }
+
+
         [HttpPost]
         [Route("ReGenerateEmailVerificationMail")]
         [AllowAnonymous]
@@ -133,6 +227,15 @@ namespace MCN.WebAPI.Areas.Users
           var response=  _UserRepositoryBL.ReGenerateEmailVerificationPasscode(createUserDto, _IpAddress);
             return Ok(response);
         }
+
+        //[HttpPost]
+        //[Route("ReGenerateEmailVerificationMail")]
+        //[AllowAnonymous]
+        //public IActionResult GetImage(int id)
+        //{
+        //    var response = _UserRepositoryBL.GetImage(id);
+        //    return Ok(response);
+        //}
 
         [HttpPost]
         [Route("EmailVerification")]

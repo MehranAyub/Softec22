@@ -29,7 +29,7 @@ export class PatientAppointmentsComponent implements OnInit {
     this.appointmentService.CancelAppointment(id).subscribe((res)=>{
       if(res.data){
         this.snackbarService.openSnack(res.swallText.title,NotificationTypeEnum.Success);
-         
+         this.ngOnInit();
        // this.appointmentDto.DoctorId=this.doctor;
       }
     })

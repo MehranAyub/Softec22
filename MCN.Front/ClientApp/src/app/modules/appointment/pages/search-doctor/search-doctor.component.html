@@ -67,10 +67,10 @@
         <p class="doc-location"><i class="fas fa-phone"></i> {{item?.phone}}</p>
        
         </div>
-        <div class="clinic-services">
-        <span>{{item?.specialisty?.name}}</span>
-        <span> Whitneing</span>
-        </div>
+        <span style="display: inline;" *ngFor="let spe of item.specialities" class="clinic-services">
+        <span >{{spe?.name}}</span>
+        
+        </span>
         </div>
         </div>
         <div class="doc-info-right">

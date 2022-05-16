@@ -43,7 +43,12 @@ GetSpecialities(): Observable<any> {
 SaveSpecialities(model:SpecialitiesDto): Observable<any> {
   return this.apiService.post('Appointments/SaveSpecialities',model);
 }
-
+UpdateUser(model:AppointmentDto): Observable<any> {
+  return this.apiService.post('Appointments/UpdateUser',model);
+}
+FileUpload (model:FormData): Observable<any> {
+  return this.apiService.post('Users/FileUpload',model);
+}
 GetAppointments(id): Observable<any> {
   this.paramss = new HttpParams().set('id',id)
   return this.apiService.get('Appointments/GetAppointments',this.paramss);
@@ -97,4 +102,3 @@ export interface specialities{
   name:string;
   isChecked:boolean;
 }
-

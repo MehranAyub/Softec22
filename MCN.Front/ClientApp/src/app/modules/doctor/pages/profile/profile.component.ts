@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AppointmentDto, AppointmentService, specialities, SpecialitiesDto } from 'src/app/modules/appointment/services/appointment.service';
 import { NotificationTypeEnum, SnackBarService } from 'src/app/shared/snack-bar.service';
 
@@ -9,12 +11,12 @@ import { NotificationTypeEnum, SnackBarService } from 'src/app/shared/snack-bar.
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+SelectedFile:File=null;
 
   appointmentDto:AppointmentDto={AppointmentId:0,Date:new Date(),DoctorId:0,description:'',PatientId:0,doctorId:0,SelectTimeSlot:'',firstName:'',lastName:'',email:'',phone:''}
-
-  constructor(private _appointmentService:AppointmentService,
-    private _snackbarService:SnackBarService,private router:Router) {
-
+ 
+  constructor(private http: HttpClient,private _appointmentService:AppointmentService,private _snackbarService:SnackBarService,private router:Router) {
+  
     let user=JSON.parse(localStorage.getItem('currentUser'));
     if(user){
       this.appointmentDto.doctorId=user.user.id;
@@ -25,12 +27,14 @@ export class ProfileComponent implements OnInit {
       this.appointmentDto.description=user.user.description;
     }
    }
-
+   
    specialities:specialities[]=[];
   ngOnInit(): void {
     this._appointmentService.GetSpecialities().subscribe((res)=>{
       if(res.statusCode==200 && res?.data){
         this.specialities=res.data;
+        console.log("profile hitted")
+
       }
     })
   }
@@ -38,6 +42,10 @@ export class ProfileComponent implements OnInit {
   checkSepcialities(){
     console.log(this.specialities);
   }
+
+getImage(){
+
+}
 
   onCheckboxChange(e,item) { 
     let found=  this.specialities.find(x=>x.id==item.id);
@@ -55,9 +63,38 @@ specialitiesDto:SpecialitiesDto={DoctorSpecialitiesDtos:[]};
     })
     this._appointmentService.SaveSpecialities(this.specialitiesDto).subscribe((res)=>{
       if(res.statusCode==200){
-        this._snackbarService.openSnack("Specialities update successfully",NotificationTypeEnum.Success);
-        this.router.navigateByUrl('/doctor/appointments');
+
+        this._appointmentService.UpdateUser(this.appointmentDto).subscribe((response)=>{
+          if(response.statusCode==200){
+            this._snackbarService.openSnack("Specialities update successfully",NotificationTypeEnum.Success);
+            this.router.navigateByUrl('/doctor/appointments');
+          }
+        })
+       
       }
     })
+  }
+
+  onFileSelected(event){
+    this.SelectedFile=<File>event.target.files[0];
+   
+  }
+
+  onUpload(){
+    const form = new FormData();
+    form.append('image',this.SelectedFile,this.SelectedFile.name);
+
+    this.http.post('http://localhost:62489/api/Users/FileUpload',form,{responseType: 'text'}).subscribe((res)=>{
+      console.log(res);
+this.appointmentDto.description=res;
+ 
+          })
+//     this._appointmentService.FileUpload(form).subscribe((res)=>{
+//      console.log(res);
+// console.log(res.data.dataFiles);
+// var formdata=form.get(res);
+// console.log(formdata);
+//          })
+
   }
 }

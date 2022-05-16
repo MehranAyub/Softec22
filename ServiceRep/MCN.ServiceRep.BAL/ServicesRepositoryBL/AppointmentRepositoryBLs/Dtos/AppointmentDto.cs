@@ -16,5 +16,11 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs.Dtos
         public string DoctorName { get; set; }
 
         public string UserName { get; set; }
+
+        public string firstName { get; set; }
+
+        public string lastName { get; set; }
+
+        public string phone { get; set; }
     }
 }
