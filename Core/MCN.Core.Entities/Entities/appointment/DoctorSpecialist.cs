@@ -11,10 +11,10 @@ namespace MCN.Core.Entities.Entities.appointment
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID { get; set; }
-        public int? DoctorId { get; set; }
+        public int?BarberId { get; set; }
         public int? SpecialistId { get; set; }
 
-        [ForeignKey(nameof(DoctorId))]
+        [ForeignKey(nameof(BarberId))]
         public User Users { get; set; }
         [ForeignKey(nameof(SpecialistId))]
         public Specialist Specialist { get; set; }

@@ -268,19 +268,29 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
 
         public string FileUpload(FileDto dto)
         {
+            var record = repositoryContext.Files.FirstOrDefault(x => x.UserId == dto.UserId);
 
-            var obj = new Files();
-            obj.DocumentId = dto.DocumentId;
-            obj.FileType = dto.FileType;
-            obj.DataFiles = dto.DataFiles;
-            obj.Name = dto.Name;
-            obj.CreatedOn = dto.CreatedOn;
+            if (record == null)
+            {
+                var obj = new Files();
+                obj.DocumentId = dto.DocumentId;
+                obj.FileType = dto.FileType;
+                obj.DataFiles = dto.DataFiles;
+                obj.Name = dto.Name;
+                obj.CreatedOn = dto.CreatedOn;
+                obj.UserId = dto.UserId;
+                repositoryContext.Files.Add(obj);
+            }
 
-            repositoryContext.Files.Add(obj);
+            else
+            {
+                record.DataFiles = dto.DataFiles;
+                repositoryContext.Update(record);
+            }
             repositoryContext.SaveChanges();
 
 
-            var image= "data:image/png;base64," + Convert.ToBase64String(obj.DataFiles);
+            var image= "data:image/png;base64," + Convert.ToBase64String(record.DataFiles);
             try
             {
 
@@ -302,6 +312,30 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 //    Data = ex
                 //};
             }
+
+        }
+
+
+        public string SalonLogo(FileDto dto)
+        {
+            var record = repositoryContext.Salon.FirstOrDefault(x => x.RegisterBy == dto.UserId);
+
+            if (record == null)
+            {
+               
+                return "null";
+            }
+
+            else
+            {
+                var image = "data:image/png;base64," + Convert.ToBase64String(dto.DataFiles);
+
+                record.SalonLogo = image;
+                repositoryContext.Update(record);
+                repositoryContext.SaveChanges();
+                return image;
+            }
+          
 
         }
 
@@ -420,8 +454,104 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
             return user;
         }
 
+        public SwallResponseWrapper GetProfileImg(int userID)
+        {
+            var user = repositoryContext.Files.FirstOrDefault(x => x.UserId==userID);
+            
+
+            if (user == null)
+            {
+               
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = null
+                };
+            }
+            else
+            {
+                var image = "data:image/png;base64," + Convert.ToBase64String(user.DataFiles);
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 404,
+                    Data = image
+                };
+            }
+
+        }
+
+        public SwallResponseWrapper RegisterSalon(SalonDto dto)
+        {
+            var record = repositoryContext.Salon.FirstOrDefault(x => x.RegisterBy == dto.RegisterBy);
+            var user = repositoryContext.Users.FirstOrDefault(x => x.ID == dto.RegisterBy);
+            if (record == null)
+            {
+                Salon salon = new Salon
+                {
+                    Name = dto.Name,
+                    RegisterBy = dto.RegisterBy,
+                    Address = dto.Address,
+                    Introduction = dto.Introduction,
+                    About = dto.About
+                };
+
+                repositoryContext.Add(salon);
+
+            }
+            else
+            {
+
+                record.Name = dto.Name;
+                record.RegisterBy = dto.RegisterBy;
+                record.Address = dto.Address;
+                record.Introduction = dto.Introduction;
+                record.About = dto.About;
+                repositoryContext.Update(record);
+            }
+           
+            repositoryContext.SaveChanges();
+            record = repositoryContext.Salon.FirstOrDefault(x => x.RegisterBy == dto.RegisterBy);
+            user.SalonId = record.ID;
+            repositoryContext.Update(record);
+            repositoryContext.SaveChanges();
 
 
+            return new SwallResponseWrapper()
+            {
+                SwallText = LoginUser.UserCreatedScuccessfully,
+                StatusCode = 200,
+                Data = dto
+            };
+        }
 
+
+        public SwallResponseWrapper GetSalon(int userID)
+        {
+            var user = repositoryContext.Salon.FirstOrDefault(x => x.RegisterBy == userID);
+
+
+            if (user == null)
+            {
+
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 404,
+                    Data = null
+                };
+            }
+            else
+            {
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = user
+                };
+            }
+
+        }
     }
 }

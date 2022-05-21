@@ -19,5 +19,10 @@ namespace MCN.Core.Entities.Entities
         [MaxLength]
         public byte[] DataFiles { get; set; }
         public DateTime? CreatedOn { get; set; }
+
+        public int UserId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public User Users { get; set; }
     }
 }

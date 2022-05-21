@@ -54,11 +54,11 @@
         <div class="doc-info-left">
         <div class="doctor-img">
         <a href="doctor-profile.html">
-        <img src="assets/img/doctors/doctor-thumb-03.jpg" class="img-fluid" alt="User Image">
+        <img src="assets/upload/barber_03.png" class="img-fluid" alt="User Image">
         </a>
         </div>
         <div class="doc-info-cont">
-        <h4 class="doc-name"><a href="doctor-profile.html">Dr. {{item?.firstName}} {{item?.lastName}}</a></h4>
+        <h4 class="doc-name"><a href="doctor-profile.html">{{item?.firstName}} {{item?.lastName}}</a></h4>
         <!-- <p class="doc-speciality">{{item?.description}}</p> -->
        
         <div class="clinic-details">
@@ -78,8 +78,8 @@
         
         </div>
         <div class="clinic-booking">
-        <a class="view-pro-btn" (click)="viewProfile(item.id)">View Profile</a>
-        <a class="apt-btn" (click)="bookAppointment(item.id)">Book Appointment</a>
+        <a class="view-pro-btn" style="color: #757575; border:1px solid #757575;" (click)="viewProfile(item.id)">View Profile</a>
+        <a class="apt-btn" style="background-color: #757575; border:none" (click)="bookAppointment(item.id)">Book Appointment</a>
         </div>
         </div>
         </div>

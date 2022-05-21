@@ -14,7 +14,14 @@ namespace MCN.ServiceRep.BAL.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DoctorId = table.Column<int>(nullable: true),
-                    PatientId = table.Column<int>(nullable: true)
+                    PatientId = table.Column<int>(nullable: true),
+                    Time = table.Column<string>(nullable: true),
+                    DoctorName = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
+                    status = table.Column<int>(nullable: false),
+                    phone = table.Column<string>(nullable: true),
+                    date = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,7 +77,8 @@ namespace MCN.ServiceRep.BAL.Migrations
                     UserLoginTypeId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Latitude = table.Column<double>(nullable: false),
-                    Longitude = table.Column<double>(nullable: false)
+                    Longitude = table.Column<double>(nullable: false),
+                    SalonId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -154,6 +162,53 @@ namespace MCN.ServiceRep.BAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Files",
+                columns: table => new
+                {
+                    DocumentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
+                    FileType = table.Column<string>(maxLength: 100, nullable: true),
+                    DataFiles = table.Column<byte[]>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Files", x => x.DocumentId);
+                    table.ForeignKey(
+                        name: "FK_Files_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Salon",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(maxLength: 100, nullable: true),
+                    SalonLogo = table.Column<byte[]>(nullable: true),
+                    RegisterBy = table.Column<int>(nullable: false),
+                    Introduction = table.Column<string>(nullable: true),
+                    About = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Salon", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Salon_Users_RegisterBy",
+                        column: x => x.RegisterBy,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserMultiFactors",
                 columns: table => new
                 {
@@ -192,6 +247,16 @@ namespace MCN.ServiceRep.BAL.Migrations
                 column: "SpecialistId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Files_UserId",
+                table: "Files",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Salon_RegisterBy",
+                table: "Salon",
+                column: "RegisterBy");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TimeSlot_AppointmentId",
                 table: "TimeSlot",
                 column: "AppointmentId");
@@ -209,6 +274,12 @@ namespace MCN.ServiceRep.BAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "DoctorSpecialist");
+
+            migrationBuilder.DropTable(
+                name: "Files");
+
+            migrationBuilder.DropTable(
+                name: "Salon");
 
             migrationBuilder.DropTable(
                 name: "TimeSlot");

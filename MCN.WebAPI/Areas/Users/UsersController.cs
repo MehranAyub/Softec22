@@ -172,11 +172,13 @@ namespace MCN.WebAPI.Areas.Users
 
 
         [HttpPost]
-        
-        [Route("FileUpload")]
+
+        [Route("FileUpload/{id}")]
         [AllowAnonymous]
-        public string FileUpload()
+        public string FileUpload(int id)
         {
+            var Userid = id;
+
 
             var file = Request.Form.Files[0];
             if (file.Length > 0)
@@ -187,14 +189,15 @@ namespace MCN.WebAPI.Areas.Users
                 // concatenating  FileName + FileExtension
                 var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
 
-                
+
 
                 var objfiles = new FileDto()
                 {
                     DocumentId = 0,
                     Name = newFileName,
                     FileType = fileExtension,
-                    CreatedOn = DateTime.Now
+                    CreatedOn = DateTime.Now,
+                    UserId = Userid
                 };
 
                 using (var target = new MemoryStream())
@@ -218,7 +221,54 @@ namespace MCN.WebAPI.Areas.Users
         
         }
 
+        [HttpPost]
+        [Route("SalonLogo/{id}")]
+        [AllowAnonymous]
+        public string SalonLogo(int id)
+        {
+            var Userid = id;
 
+
+            var file = Request.Form.Files[0];
+            if (file.Length > 0)
+            {//Getting FileName
+                var fileName = Path.GetFileName(file.FileName);
+                //Getting file Extension
+                var fileExtension = Path.GetExtension(fileName);
+                // concatenating  FileName + FileExtension
+                var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+
+
+
+                var objfiles = new FileDto()
+                {
+                    DocumentId = 0,
+                    Name = newFileName,
+                    FileType = fileExtension,
+                    CreatedOn = DateTime.Now,
+                    UserId = Userid
+                };
+
+                using (var target = new MemoryStream())
+                {
+                    file.CopyTo(target);
+                    objfiles.DataFiles = target.ToArray();
+                }
+
+                var response = _UserRepositoryBL.SalonLogo(objfiles);
+
+
+
+
+                return response;
+            }
+            else
+            {
+                return "file nt found";
+            }
+
+
+        }
         [HttpPost]
         [Route("ReGenerateEmailVerificationMail")]
         [AllowAnonymous]
@@ -257,6 +307,45 @@ namespace MCN.WebAPI.Areas.Users
             return Ok(new { tok = "token was here" });
         }
 
-        
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetProfileImg")]
+        public IActionResult GetProfileImg(int id)
+        {
+
+            var result = _UserRepositoryBL.GetProfileImg(id);
+            if (result.Data == null)
+            {
+                return Ok(new SwallResponseWrapper { Data = null, StatusCode = 401, SwallText = result.SwallText});
+            }
+           
+            return Ok(new SwallResponseWrapper { Data = result, StatusCode = 200, SwallText = result.SwallText });
+
+        }
+
+        [HttpPost]
+        [Route("RegisterSalon")]
+        [AllowAnonymous]
+        public IActionResult RegisterSalon([FromBody] SalonDto dto)
+        {
+            var result = _UserRepositoryBL.RegisterSalon(dto);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetSalon")]
+        public IActionResult GetSalon(int id)
+        {
+
+            var result = _UserRepositoryBL.GetSalon(id);
+            if (result.Data == null)
+            {
+                return Ok(result);
+            }
+
+            return Ok(result);
+
+        }
     }
 }

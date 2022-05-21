@@ -12,7 +12,7 @@
     </span>
     </a>
     <a href="index.html" class="navbar-brand logo">
-    <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+        <img src="assets/images/logo.png" class="img-fluid" alt="Logo">
     </a>
     </div>
     <div class="main-menu-wrapper">
@@ -29,16 +29,16 @@
     <a routerLink="/appointment/search-doctor">Book Appointment</a>
     </li>
     <li class="has-submenu">
-        <a >Doctors <i class="fas fa-chevron-down"></i></a>
+        <a >Barbers <i class="fas fa-chevron-down"></i></a>
         <ul class="submenu">
         <li routerLink="/doctor/appointments"><a >Search Appointments</a></li>
         </ul>
      </li>
 
     <li class="has-submenu">
-    <a >Patients <i class="fas fa-chevron-down"></i></a>
+    <a >Users <i class="fas fa-chevron-down"></i></a>
     <ul class="submenu">
-    <li><a routerLink="/appointment/search-doctor">Search Doctor</a></li>
+    <li><a routerLink="/appointment/search-doctor">Search Barbers</a></li>
 <li><a routerLink="/appointment/patient-appointments">View Appointments</a></li>
     </ul>
     </li>
@@ -47,13 +47,13 @@
         <a >Logout</a>
         </li>
         <li class="login-link" *ngIf="!user">
-            <a routerLink="/account/login">Login</a>
+            <a  routerLink="/account/login">Login</a>
         </li>
     </ul>
     </div>
     <ul class="nav header-navbar-rht">
     <li class="nav-item" *ngIf="!user">
-    <a class="nav-link header-login" >Login </a>
+    <a class="nav-link header-login" routerLink="/account/login">Login </a>
     </li>
 
     <li class="nav-item" *ngIf="!!user" (click)="logout()">
@@ -70,47 +70,32 @@
     <div class="footer-top">
     <div class="container-fluid">
     <div class="row align-items-center">
-    <div class="col-lg-3 col-md-6">
-    
-    <div class="footer-widget footer-about">
-    <div class="footer-logo">
-    <img src="assets/img/logo.png" alt="logo">
-    </div>
-    <div class="footer-about-content">
-    <div class="social-icon">
-    <ul>
-    <li>
-     <a href="#" target="_blank"><img src="assets/img/payment1.jpg" alt=""></a>
-    </li>
-    <li>
-    <a href="#" target="_blank"><img src="assets/img/payment2.jpg" alt=""></a>
-    </li>
-    <li>
-    <a href="#" target="_blank"><img src="assets/img/payment3.jpg" alt=""></a>
-    </li>
-    <li>
-    <a href="#" target="_blank"><img src="assets/img/payment4.jpg" alt=""></a>
-    </li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    
-    </div>
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-6 col-sm-6">
     
     <div class="footer-widget footer-menu">
     <h2 class="footer-title">Users can</h2>
     <ul>
-    <li><a href="search.html">Search for Doctors</a></li>
+    <li><a href="search.html">Search for Barbers</a></li>
     <li><a href="login.html">Login</a></li>
     <li><a href="register.html">Register</a></li>
-    <li><a href="booking.html">Booking</a></li>
+    <li><a href="booking.html">Book Appointments</a></li>
     </ul>
     </div>
     
     </div>
-   
+    <div class="col-lg-3 col-md-6 col-sm-6">
+    
+        <div class="footer-widget footer-menu">
+        <h2 class="footer-title">Barbers can</h2>
+        <ul>
+        <li><a href="search.html">Add Services</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="booking.html">Approve Appointments</a></li>
+        </ul>
+        </div>
+        
+        </div>
  
     </div>
     </div>

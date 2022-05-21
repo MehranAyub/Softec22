@@ -28,6 +28,8 @@ namespace MCN.ServiceRep.BAL.ContextModel
         public virtual DbSet<TimeSlot> TimeSlot { get; set; }
         public DbSet<Files> Files { get; set; }
         public virtual DbSet<AvailSlots> AvailSlots { get; set; }
+
+        public virtual DbSet<Salon> Salon { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 

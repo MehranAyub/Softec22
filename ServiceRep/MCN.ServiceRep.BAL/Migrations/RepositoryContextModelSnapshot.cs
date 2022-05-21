@@ -19,6 +19,70 @@ namespace MCN.ServiceRep.BAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MCN.Core.Entities.Entities.Files", b =>
+                {
+                    b.Property<int>("DocumentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("DataFiles")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DocumentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Files");
+                });
+
+            modelBuilder.Entity("MCN.Core.Entities.Entities.Salon", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("About")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Introduction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RegisterBy")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("SalonLogo")
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RegisterBy");
+
+                    b.ToTable("Salon");
+                });
+
             modelBuilder.Entity("MCN.Core.Entities.Entities.User", b =>
                 {
                     b.Property<int>("ID")
@@ -70,6 +134,9 @@ namespace MCN.ServiceRep.BAL.Migrations
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SalonId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("UpdatedBy")
                         .HasColumnType("int");
@@ -139,7 +206,28 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<string>("DoctorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("status")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -252,6 +340,24 @@ namespace MCN.ServiceRep.BAL.Migrations
                     b.HasIndex("AppointmentId");
 
                     b.ToTable("TimeSlot");
+                });
+
+            modelBuilder.Entity("MCN.Core.Entities.Entities.Files", b =>
+                {
+                    b.HasOne("MCN.Core.Entities.Entities.User", "Users")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MCN.Core.Entities.Entities.Salon", b =>
+                {
+                    b.HasOne("MCN.Core.Entities.Entities.User", "Users")
+                        .WithMany()
+                        .HasForeignKey("RegisterBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MCN.Core.Entities.Entities.UserMultiFactor", b =>

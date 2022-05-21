@@ -1,5 +1,8 @@
 <div class="main-wrapper">
-<header class="header">
+
+
+
+ <header class="header">
     <nav class="navbar navbar-expand-lg header-nav">
     <div class="navbar-header">
     <a id="mobile_btn" href="javascript:void(0);">
@@ -10,7 +13,7 @@
     </span>
     </a>
     <a  class="navbar-brand logo">
-    <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+    <img src="assets/images/logo.png" class="img-fluid" alt="Logo">
     </a>
     </div>
     <div class="main-menu-wrapper">
@@ -28,7 +31,7 @@
     <a routerLink="/appointment/search-doctor">Book Appointment</a>
 </li>
 <li class="has-submenu" *ngIf="this.appointmentDto.userLoginTypeId==2">
-    <a >Doctors <i class="fas fa-chevron-down"></i></a>
+    <a >Barbers <i class="fas fa-chevron-down"></i></a>
     <ul class="submenu">
     <li routerLink="/doctor/appointments"><a >View Appointments</a></li>
     <li><a routerLink="/doctor/profile">View Profile</a></li>
@@ -36,9 +39,9 @@
  </li>
 
 <li class="has-submenu" *ngIf="this.appointmentDto.userLoginTypeId==1">
-<a >Patients <i class="fas fa-chevron-down"></i></a>
+<a >Users <i class="fas fa-chevron-down"></i></a>
 <ul class="submenu">
-<li><a routerLink="/appointment/search-doctor">Search Doctor</a></li>
+<li><a routerLink="/appointment/search-doctor">Search Barber</a></li>
 <li><a routerLink="/appointment/patient-appointments">View Appointments</a></li>
 
 </ul>
@@ -76,8 +79,8 @@
         </div>
         <div class="user-text">
         <h6>{{appointmentDto?.firstName}} {{appointmentDto?.lastName}}</h6>
-        <p class="text-muted mb-0" *ngIf="this.appointmentDto.userLoginTypeId==1">Patient</p>
-        <p class="text-muted mb-0" *ngIf="this.appointmentDto.userLoginTypeId==2">Doctor</p>
+        <p class="text-muted mb-0" *ngIf="this.appointmentDto.userLoginTypeId==1">User</p>
+        <p class="text-muted mb-0" *ngIf="this.appointmentDto.userLoginTypeId==2">Barber</p>
         </div>
         </div>
         </div>
@@ -87,7 +90,7 @@
 
 
     </nav>
-    </header>
+    </header> 
 
 <router-outlet></router-outlet>
 
@@ -97,75 +100,37 @@
     <div class="footer-top">
     <div class="container-fluid">
     <div class="row align-items-center">
-    <div class="col-lg-3 col-md-6">
-    
-    <div class="footer-widget footer-about">
-    <div class="footer-logo">
-    <img src="assets/img/logo.png" alt="logo">
-    </div>
-    <div class="footer-about-content">
-    <div class="social-icon">
-    <ul>
-    <li>
-    <a href="#" target="_blank"><img src="assets/img/payment1.jpg" alt=""></a>
-    </li>
-    <li>
-    <a href="#" target="_blank"><img src="assets/img/payment2.jpg" alt=""></a>
-    </li>
-    <li>
-    <a href="#" target="_blank"><img src="assets/img/payment3.jpg" alt=""></a>
-    </li>
-    <li>
-    <a href="#" target="_blank"><img src="assets/img/payment4.jpg" alt=""></a>
-    </li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    
-    </div>
-    <div class="col-lg-3 col-md-6">
+   
+    <div class="col-lg-3 col-md-6 col-sm-12">
     
     <div class="footer-widget footer-menu">
-    <h2 class="footer-title">For Patients</h2>
+    <h2 class="footer-title">For Users</h2>
     <ul>
-    <li><a href="search.html">Search for Doctors</a></li>
+    <li><a href="search.html">Search for Barbers</a></li>
     <li><a href="login.html">Login</a></li>
     <li><a href="register.html">Register</a></li>
     <li><a href="booking.html">Booking</a></li>
-    <li><a href="patient-dashboard.html">Patient Dashboard</a></li>
+    <li><a href="patient-dashboard.html">User Dashboard</a></li>
     </ul>
     </div>
     
     </div>
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-6 col-sm-12">
     
     <div class="footer-widget footer-menu">
-    <h2 class="footer-title">For Doctors</h2>
+    <h2 class="footer-title">For Barbers</h2>
     <ul>
-    <li><a href="appointments.html">Appointments</a></li>
-    <li><a href="chat.html">Chat</a></li>
-    <li><a href="login.html">Login</a></li>
-    <li><a href="doctor-register.html">Register</a></li>
-    <li><a href="doctor-dashboard.html">Doctor Dashboard</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="doctor-register.html">Register</a></li>
+    <li><a href="doctor-dashboard.html">Barber Dashboard</a></li>
+    <li><a href="appointments.html">View Appointments</a></li>
+    <li><a href="appointments.html">Approve Appointments</a></li>
+   
     </ul>
     </div>
     
     </div>
-    <div class="col-lg-3 col-md-6">
-    
-    <div class="footer-widget footer-menu">
-    <h2 class="footer-title">Sitemap</h2>
-    <ul>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="chat.html">FAQs</a></li>
-    <li><a href="payment.html">Payment</a></li>
-    <li><a href="checkout.html">Shipment</a></li>
-    <li><a href="privacy-policy.html">Return policy</a></li>
-    </ul>
-    </div>
-    
-    </div>
+   
     </div>
     </div>
     </div>
@@ -178,7 +143,7 @@
     <div class="row">
     <div class="col-md-6 col-lg-6">
     <div class="copyright-text">
-    <p class="mb-0">&copy; 2020 Doccure. All rights reserved.</p>
+    <p class="mb-0">&copy; 2020 Barberia. All rights reserved.</p>
     </div>
     </div>
     <div class="col-md-6 col-lg-6">

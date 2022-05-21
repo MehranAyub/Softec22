@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AppointmentService, SearchDoctorFilterDto, specialities } from '../../services/appointment.service';
 
@@ -9,19 +10,21 @@ import { AppointmentService, SearchDoctorFilterDto, specialities } from '../../s
 })
 export class SearchDoctorComponent implements OnInit {
 
-  constructor(private appointmentService:AppointmentService,private router:Router) { }
+  constructor(private appointmentService:AppointmentService,private router:Router,private _sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.search();
     this.GetSpecialities();
   }
   doctors:any[]=[];
+  imagePath:any;
   searchDoctorFilter:SearchDoctorFilterDto={Keyword:'',PageNumber:1,PageSize:10,SpecialistId:[]};
   search(){
     this.appointmentService.GetDoctors(this.searchDoctorFilter).subscribe((res)=>{
       console.log(res);
       if(res?.data?.length>0){
         this.doctors=res?.data;
+    
       }else{
         this.doctors=[];
       }

@@ -7,7 +7,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'appointment'
+        redirectTo: 'account'
       },
       {
         path: 'account',
@@ -39,7 +39,7 @@ const routes: Routes = [
             (m) => m.DoctorModule
           ),
           
-      canActivate:[AuthGuard]
+      //canActivate:[AuthGuard]
       }
      
 ];

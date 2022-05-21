@@ -36,8 +36,20 @@ GetDoctor(id): Observable<any> {
   return this.apiService.get('Appointments/GetDoctor',this.paramss);
 }
 
+GetSalon(id): Observable<any> {
+  this.paramss = new HttpParams().set('id',id)
+  return this.apiService.get('Users/GetSalon',this.paramss);
+}
+GetProfileImg(id): Observable<any> {
+  this.paramss = new HttpParams().set('id',id)
+  return this.apiService.get('Users/GetProfileImg',this.paramss);
+}
 GetSpecialities(): Observable<any> { 
   return this.apiService.get('Appointments/GetSpecialities');
+}
+GetBarbers(id): Observable<any> {
+  this.paramss = new HttpParams().set('id',id)
+  return this.apiService.get('Users/GetBarbers',this.paramss);
 }
 
 SaveSpecialities(model:SpecialitiesDto): Observable<any> {
@@ -46,6 +58,11 @@ SaveSpecialities(model:SpecialitiesDto): Observable<any> {
 UpdateUser(model:AppointmentDto): Observable<any> {
   return this.apiService.post('Appointments/UpdateUser',model);
 }
+
+RegisterSalon(model:SalonDto): Observable<any> {
+  return this.apiService.post('Users/RegisterSalon',model);
+}
+
 FileUpload (model:FormData): Observable<any> {
   return this.apiService.post('Users/FileUpload',model);
 }
@@ -85,6 +102,26 @@ export interface AppointmentDto{
    doctorId?:number;
    userLoginTypeId?:number
 }
+export interface SalonDto{
+ID:number,
+Address:string,
+Introduction:string,
+Logo:string,
+  Name:string;
+  About?:string
+  RegisterBy?:number;
+  OwnerName:string;
+  OwnerEmail:string;
+}
+
+export interface BarberDto{
+  ID:number,
+  Logo:string,
+    FirstName:string;
+    LastName:string;
+    Phone:string;
+    SalonId
+  }
 
 export class SpecialitiesDto
 {

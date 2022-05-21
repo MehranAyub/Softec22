@@ -37,7 +37,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
                 users= users.Where(x => (x.Description.Contains(search.Keyword) || x.FirstName.Contains(search.Keyword) || x.LastName.Contains(search.Keyword)));
             }
             var data = (from DS in doctorSpecialities
-                        join u in users on DS.DoctorId equals u.ID
+                        join u in users on DS.BarberId equals u.ID
                         join s in repositoryContext.Specialist on DS.SpecialistId equals s.ID
                                 select new
                                 {
@@ -50,8 +50,12 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
                                     Longitude = u.Longitude,
                                     Email =u.Email,
                                     Phone=u.Phone,
-                                    Specialities= (from DSS in doctorSpecialities
-                                                  join ss in repositoryContext.Specialist on DSS.SpecialistId equals ss.ID where DSS.DoctorId == u.ID select ss).ToList()
+                                    images = (from DSS in users
+                                                    join ss in repositoryContext.Files on DSS.ID equals ss.UserId
+                                                    where DSS.ID == u.ID
+                                                    select ss.DataFiles).ToList(),
+                                    Specialities = (from DSS in doctorSpecialities
+                                                  join ss in repositoryContext.Specialist on DSS.SpecialistId equals ss.ID where DSS.BarberId == u.ID select ss).ToList()
                                 }).Distinct();
 
           
@@ -402,7 +406,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
                 foreach(var item in specialitiesDto.DoctorSpecialitiesDtos)
                 {
                     var obj = new DoctorSpecialist();
-                    obj.DoctorId = item.DoctorId;
+                    obj.BarberId = item.DoctorId;
                     obj.SpecialistId = item.SpecialistId;
                     repositoryContext.DoctorSpecialist.Add(obj);
                 } 
