@@ -15,14 +15,8 @@ const routes: Routes = [
       path: 'login',
       component: LoginComponent
     },
-    {
-      path: '**',
-      component: LoginComponent
-    },
-    {
-      path: '',
-      component: LoginComponent
-    },
+   
+    
     {
       path: 'register',
       component: UserRegisterComponent
@@ -31,6 +25,10 @@ const routes: Routes = [
       path: 'email-verify',
       component: EmailVerifyComponent
     },
+    {
+      path: '**',
+      component: LoginComponent
+    }
 ]
 }
 ];

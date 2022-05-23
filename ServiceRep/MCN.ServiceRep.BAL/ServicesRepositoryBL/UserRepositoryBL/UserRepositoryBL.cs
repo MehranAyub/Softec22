@@ -155,8 +155,9 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 Phone=dto.Phone,
                 Latitude=dto.Latitude,
                 Longitude=dto.Longitude,
-                UserLoginTypeId =dto.LoginType
-
+                UserLoginTypeId =dto.LoginType,
+                Description=dto.Description,
+                SalonId=dto.SalonId
             };
            
 
@@ -272,10 +273,11 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
 
             if (record == null)
             {
+                var img="";
                 var obj = new Files();
                 obj.DocumentId = dto.DocumentId;
                 obj.FileType = dto.FileType;
-                obj.DataFiles = dto.DataFiles;
+                obj.DataFiles =dto.DataFiles;
                 obj.Name = dto.Name;
                 obj.CreatedOn = dto.CreatedOn;
                 obj.UserId = dto.UserId;
@@ -284,13 +286,13 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
 
             else
             {
-                record.DataFiles = dto.DataFiles;
+                record.DataFiles = dto.DataFiles; 
                 repositoryContext.Update(record);
             }
             repositoryContext.SaveChanges();
 
 
-            var image= "data:image/png;base64," + Convert.ToBase64String(record.DataFiles);
+            var image= "data:image/png;base64," + Convert.ToBase64String(dto.DataFiles);
             try
             {
 
@@ -553,5 +555,99 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
             }
 
         }
+
+        public SwallResponseWrapper Salon(int id)
+        {
+            var user = repositoryContext.Salon.FirstOrDefault(x => x.ID == id);
+
+
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = user
+                };
+           
+
+        }
+        public SwallResponseWrapper GetBarbers(int SalonId)
+        {
+            var user = repositoryContext.Users.Where(x => x.SalonId == SalonId && x.Description!=null).ToList();
+
+
+            if (user == null)
+            {
+
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 404,
+                    Data = null
+                };
+            }
+            else
+            {
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = user
+                };
+            }
+
+        }
+
+      
+
+        public string RemoveBarber(int userID)
+        {
+            var user = repositoryContext.Users.FirstOrDefault(x => x.ID == userID);
+            repositoryContext.Appointment.RemoveRange(repositoryContext.Appointment.Where(x => x.DoctorId == user.ID));
+            repositoryContext.AvailSlots.RemoveRange(repositoryContext.AvailSlots.Where(x => x.BarberID == user.ID));
+            repositoryContext.Users.Remove(user);
+            repositoryContext.SaveChanges();
+            return "Barber Removed Successfully";
+        }
+
+        public SwallResponseWrapper SearchBarbers(int SalonId)
+        {
+            var user = repositoryContext.Users.Where(x => x.SalonId == SalonId).ToList();
+            var file = repositoryContext.Files.ToList();
+
+            var data = (from U in user
+                        join F in file on U.ID equals F.UserId into fil
+                        from File in fil.DefaultIfEmpty()
+                        select new
+                        {
+                            ID=U.ID,
+                            FirstName = U.FirstName,
+                            LastName = U.LastName,
+                            Phone = U.Phone,
+                            Address = U.Address,
+                            Image  = (File == null || File.DataFiles == null ? "God dammit work" : "data:image/png;base64," + Convert.ToBase64String(File.DataFiles))
+                        }
+                        ).ToList();
+
+                return new SwallResponseWrapper()
+                {
+                    SwallText = null,
+                    StatusCode = 200,
+                    Data = data
+                };
+
+
+        }
+
+        public int GetSalonID(int userID)
+        {
+            var user = repositoryContext.Users.FirstOrDefault(x => x.ID == userID).SalonId;
+          
+            return (int)user;
+        }
+
     }
 }
+
+  
+
+    

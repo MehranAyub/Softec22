@@ -9,10 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookingSuccessComponent } from './pages/booking-success/booking-success.component';
 import { PatientAppointmentsComponent } from './pages/patient-appointments/patient-appointments.component';
 import { SelectedDayComponent } from './pages/selected-day/selected-day.component';
+import { SearchBarbersComponent } from './pages/search-barbers/search-barbers.component';
 
 
 @NgModule({
-  declarations: [AppointmentComponent, SearchDoctorComponent, CheckoutComponent, BookingSuccessComponent, PatientAppointmentsComponent, SelectedDayComponent],
+  declarations: [AppointmentComponent, SearchDoctorComponent, CheckoutComponent, BookingSuccessComponent, PatientAppointmentsComponent, SelectedDayComponent, SearchBarbersComponent],
   imports: [
     CommonModule,
     FormsModule,

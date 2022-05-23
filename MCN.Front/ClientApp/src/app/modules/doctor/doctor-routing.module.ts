@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/shared/_helpers/auth.guard';
 import { DoctorComponent } from './doctor.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
 import { NewBarberComponent } from './pages/new-barber/new-barber.component';
@@ -13,25 +14,31 @@ const routes: Routes = [
     children: [ 
     {
       path: '',
-      component: ProfileComponent
+      component: ProfileComponent,
+      canActivate:[AuthGuard]
+
     },
     {
       path: 'profile',
-      component: ProfileComponent
+      component: ProfileComponent,
+      canActivate:[AuthGuard]
     }
     ,
     {
       path: 'register-salon',
-      component: RegisterSalonComponent
+      component: RegisterSalonComponent,
+      canActivate:[AuthGuard]
     },    
     {
       path: 'new-barber',
-      component: NewBarberComponent
+      component: NewBarberComponent,
+      canActivate:[AuthGuard]
     },  
 
     {
       path: 'appointments',
-      component: AppointmentsComponent
+      component: AppointmentsComponent,
+      canActivate:[AuthGuard]
     },
   ]
 }

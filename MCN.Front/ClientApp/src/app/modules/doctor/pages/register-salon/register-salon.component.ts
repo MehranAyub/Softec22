@@ -18,13 +18,17 @@ export class RegisterSalonComponent implements OnInit {
   
       let user=JSON.parse(localStorage.getItem('currentUser'));
   
-      if(user){
-        console.log(user);
+      if(user.user.userLoginTypeId==2){
         this.salonDto.RegisterBy=user.user.id;
         this.salonDto.OwnerEmail=user.user.email;
         this.salonDto.OwnerName=user.user.firstName+" "+user.user.lastName;
         this.salonDto.Address=user.user.address;
       }
+      else{
+        
+      this.router.navigateByUrl('/appointment/search-salon');
+      }
+
      }
      
      specialities:specialities[]=[];
@@ -36,7 +40,6 @@ export class RegisterSalonComponent implements OnInit {
           this._appointmentService.GetSalon(this.salonDto.RegisterBy).subscribe((response)=>{
 
             if(response.statusCode==200 && response?.data){
-              console.log(response.data);
               this.salonDto.About=response.data.about;
               this.salonDto.Introduction=response.data.introduction;
               this.salonDto.Name=response.data.name;
@@ -50,7 +53,6 @@ export class RegisterSalonComponent implements OnInit {
     }
   
     checkSepcialities(){
-      console.log(this.specialities);
     }
   
   

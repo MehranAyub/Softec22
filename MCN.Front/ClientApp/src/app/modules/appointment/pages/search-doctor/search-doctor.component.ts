@@ -10,29 +10,38 @@ import { AppointmentService, SearchDoctorFilterDto, specialities } from '../../s
 })
 export class SearchDoctorComponent implements OnInit {
 
-  constructor(private appointmentService:AppointmentService,private router:Router,private _sanitizer: DomSanitizer) { }
+  constructor(private appointmentService:AppointmentService,private router:Router,private _sanitizer: DomSanitizer) {
+
+    let user=JSON.parse(localStorage.getItem('currentUser'));
+    if(user.user.userLoginTypeId!=1){
+
+    
+      this.router.navigateByUrl('/doctor/appointments');
+    }
+
+   }
 
   ngOnInit(): void {
     this.search();
     this.GetSpecialities();
   }
-  doctors:any[]=[];
+  salons:any[]=[];
   imagePath:any;
   searchDoctorFilter:SearchDoctorFilterDto={Keyword:'',PageNumber:1,PageSize:10,SpecialistId:[]};
   search(){
-    this.appointmentService.GetDoctors(this.searchDoctorFilter).subscribe((res)=>{
-      console.log(res);
+    this.appointmentService.GetSalonList(this.searchDoctorFilter).subscribe((res)=>{
+   
       if(res?.data?.length>0){
-        this.doctors=res?.data;
+        this.salons=res?.data;
     
       }else{
-        this.doctors=[];
+        this.salons=[];
       }
     })
   }
 
   bookAppointment(id){
-    this.router.navigate(['/appointment/selected-day'], { queryParams: { doctorId: id }});
+    this.router.navigate(['/appointment/search-barbers'], { queryParams: { salonId: id }});
   }
 
   viewProfile(id){

@@ -1,3 +1,13 @@
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+    <div class="row align-items-center">
+    <div class="col-md-12 col-12">
+    <h2 class="breadcrumb-title">Your Barbers</h2>
+    </div>
+    </div>
+    </div>
+    </div>
+
 <div class="container">
 
     <div class="row">
@@ -8,26 +18,30 @@
                 <span class="module-separator"></span>
             </div><!-- end title -->
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Name">
+                <input class="form-control" #fname [(ngModel)]="barberDto.FirstName" type="text" placeholder="First Name" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Email">
+                <input class="form-control" #lname [(ngModel)]="barberDto.LastName" type="text" placeholder="Last Name" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Password">
+                <input class="form-control" #phone [(ngModel)]="barberDto.Phone" type="text" placeholder="Phone" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" placeholder="Confirm Password">
+                <input class="form-control" #desc [(ngModel)]="barberDto.Description" type="text" placeholder="Description" required>
             </div>
+            <div>
+                <p style="color: red;">{{this.error}}</p>
+            </div>
+
             <div class="form-group mb-0">
-                <button class="btn btn-primary btn-block mb-5" type="submit">Register</button>
+                <button class="btn btn-primary btn-block mb-5" (click)="RegisterBarber()" (click)="fname.value='';lname.value='';phone.value='';desc.value=''" type="submit">Register</button>
             </div>
        
 
     </div><!-- end sidebar -->
 
-        <div class="col-md-8 col-sm-12">
-            <div class="row text-center">
+        <div class="col-md-8 col-sm-12 mt-5">
+            
                 <div class="appointments">
     
                     <div class="appointment-list" *ngFor="let item of Barbers">
@@ -36,24 +50,18 @@
                     <img src="assets/img/patients/patient.jpg" alt="User Image">
                     </a>
                     <div class="profile-det-info">
-                    <h3><a href="patient-profile.html">{{item?.firstName}+" "+{{item.lastName}</a></h3>
+                    <h3><a >{{item?.firstName}}&nbsp;{{item.lastName}}</a></h3>
                     <div class="patient-details">
-                    <!-- <h5><i class="far fa-clock"></i> 14 Nov 2019, 10.00 AM</h5> -->
-                    <h5><i class="fas fa-clock"></i> {{item?.time}}</h5>
-                    <h5><i class="fas fa-calendar"></i>{{item?.date}}</h5>
-                    <h5 class="mb-0"><i class="fas fa-phone"></i> {{item?.phone}}</h5>
+                    
+                    <h5 class="mt-3"><i class="fas fa-phone"></i> {{item?.phone}}</h5>
+                    <h5 class="mt-3"> {{item?.description}}</h5>
                     </div>
                     </div>
                     </div>
                     <div class="appointment-action">
-                    <a  class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-                    <i class="far fa-eye"></i> View
-                    </a>
-                    <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                    <i class="fas fa-check"></i> Accept
-                    </a>
-                    <a (click)="CancelAppointment(item.id)" class="btn btn-sm bg-danger-light">
-                    <i class="fas fa-times"></i> Cancel
+                    
+                    <a (click)="RemoveBarber(item.id)" class="btn btn-sm bg-danger-light">
+                    <i class="fas fa-times"></i> Remove
                     </a>
                     </div>
                     </div>
@@ -67,4 +75,4 @@
 
       
     </div><!-- end row -->
-</div>
+

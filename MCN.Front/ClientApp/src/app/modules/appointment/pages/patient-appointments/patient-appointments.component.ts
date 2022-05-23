@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentService } from '../../services/appointment.service';
 import { SnackBarService, NotificationTypeEnum } from 'src/app/shared/snack-bar.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-patient-appointments',
   templateUrl: './patient-appointments.component.html',
@@ -8,24 +9,29 @@ import { SnackBarService, NotificationTypeEnum } from 'src/app/shared/snack-bar.
 })
 export class PatientAppointmentsComponent implements OnInit {
 
-  constructor(private appointmentService:AppointmentService,private snackbarService:SnackBarService) { }
+  constructor(private appointmentService:AppointmentService,private snackbarService:SnackBarService,private router:Router) { }
+  errors:string;
   appointments:any=[];
   ngOnInit(): void {
     let user=JSON.parse(localStorage.getItem('currentUser'));
-    if(user){
+    if(user.user.userLoginTypeId==1){
      let patientid=user.user.id;
      this.appointmentService.GetPatientAppointments(patientid).subscribe((res)=>{
-      if(res.statusCode==200){
+      if(res.data.length!=0){
         this.appointments=res.data;
-        console.log(this.appointments);
+      }
+      else{
+this.errors="You have not any registered appointment at any salon"
       }
     })
     }
-    
+    else{
+      
+      this.router.navigateByUrl('/doctor/appointments');
+    }
   }
 
   CancelAppointment(id){
-    console.log("Canecl Appointmennt");
     this.appointmentService.CancelAppointment(id).subscribe((res)=>{
       if(res.data){
         this.snackbarService.openSnack(res.swallText.title,NotificationTypeEnum.Success);

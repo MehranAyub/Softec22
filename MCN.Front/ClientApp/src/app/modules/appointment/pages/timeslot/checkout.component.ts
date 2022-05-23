@@ -13,14 +13,14 @@ export class CheckoutComponent implements OnInit {
   constructor(private activatedRoute:ActivatedRoute,private router:Router,private appointmentService:AppointmentService) {
     
     let user=JSON.parse(localStorage.getItem('currentUser'));
-    if(user){
+    if(user.user.userLoginTypeId==1){
       this.appointmentDto.PatientId=user.user.id;
       this.appointmentDto.firstName=user.user.firstName;
       this.appointmentDto.lastName=user.user.lastName;
       this.appointmentDto.email=user.user.email;
       this.appointmentDto.phone=user.user.phone;
     }else{
-      this.router.navigate(['/account/login']);
+      this.router.navigate(['/doctor/appointments']);
     }
     activatedRoute.queryParams.subscribe(params => {
       // this.isFromCashScreen = (params['isFromCashScreen'] == 'true');

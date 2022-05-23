@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppointmentService } from 'src/app/modules/appointment/services/appointment.service';
 import { NotificationTypeEnum, SnackBarService } from 'src/app/shared/snack-bar.service';
 
@@ -9,23 +10,25 @@ import { NotificationTypeEnum, SnackBarService } from 'src/app/shared/snack-bar.
 })
 export class AppointmentsComponent implements OnInit {
 
-  constructor(private appointmentService:AppointmentService,private snackbarService:SnackBarService) { }
+  constructor(private appointmentService:AppointmentService,private snackbarService:SnackBarService,private router:Router) { }
   appointments:any=[];
   ngOnInit(): void {
     let user=JSON.parse(localStorage.getItem('currentUser'));
-    if(user){
-     let doctorId=user.user.id;
-     this.appointmentService.GetAppointments(doctorId).subscribe((res)=>{
+    if(user.user.userLoginTypeId==2){
+
+     let salonId=user.user.salonId;
+     this.appointmentService.GetAppointments(salonId).subscribe((res)=>{
       if(res.statusCode==200){
         this.appointments=res.data;
-        console.log(res.data);
       }
     })
+    }
+    else{
+      this.router.navigateByUrl('/appointment/patient-appointments');
     }
   
   }
   CancelAppointment(id){
-    console.log("Canecl Appointmennt");
     this.appointmentService.CancelAppointment(id).subscribe((res)=>{
       if(res.data){
         this.snackbarService.openSnack(res.swallText.title,NotificationTypeEnum.Success);

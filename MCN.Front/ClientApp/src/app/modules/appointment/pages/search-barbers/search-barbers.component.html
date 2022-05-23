@@ -22,25 +22,24 @@
         
         <div class="card search-filter">
         <div class="card-header">
-        <h4 class="card-title mb-0">Search Filter</h4>
+        <h4 class="card-title mb-0">Selected Salon</h4>
         </div>
         <div class="card-body">
-        <div class="filter-widget">
-        <div class="">
-        <input type="text" class="form-control" #keywordVal (keyup)="keyUpEvent(keywordVal.value)" placeholder="Type any keyword">
-        </div>
-        </div>
-     
-        <div class="filter-widget">
-        <h4>Select Specialities</h4>
-        <div *ngFor="let item of specialities">
-        <label class="custom_check">
-        <input type="checkbox" name="select_specialist" name="select_specialist" [checked]="item?.isChecked" (change)="onCheckboxChange($event,item)">
-        <span class="checkmark"></span> {{item?.name}}
-        </label>
-        </div>
-       
-        </div>
+            <div class="doctor-img">
+                <a href="doctor-profile.html">
+                <img style="margin-left:25% ;"  [src]="Salon?.salonLogo" onerror="this.src='assets/upload/barber_03.png'" class="img-fluid" alt="User Image">
+                </a>
+                </div>
+                <div class="doc-info-cont">
+                    <h4 class="doc-name mt-2"><a href="doctor-profile.html"> {{Salon?.name}}</a></h4>
+                    <!-- <p class="doc-speciality">{{item?.description}}</p> -->
+                   
+                    <div class="clinic-details">
+                    
+                    <p class="doc-location mt-3"><i class="fas fa-map-marker-alt"></i> {{Salon?.address}}</p>
+                    </div>
+                   
+                    </div>
       
         </div>
         </div>
@@ -48,35 +47,29 @@
         </div>
         <div class="col-md-12 col-lg-8 col-xl-9">
         
-        <div class="card" *ngFor="let item of salons">
+        <div class="card" *ngFor="let item of Barbers">
         <div class="card-body">
         <div class="doctor-widget">
         <div class="doc-info-left">
         <div class="doctor-img">
         <a href="doctor-profile.html">
-        <img   [src]="item?.logo" onerror="assets/upload/barber_03.png" class="img-fluid" alt="User Image">
+        <img   [src]="item?.image" onerror="this.src='assets/upload/barber_03.png'" class="img-fluid" alt="User Image">
         </a>
         </div>
         <div class="doc-info-cont">
-        <h4 class="doc-name"><a href="doctor-profile.html"> {{item?.name}}</a></h4>
+        <h4 class="doc-name"><a href="doctor-profile.html"> {{item?.firstName}} {{item?.lastName}}</a></h4>
         <!-- <p class="doc-speciality">{{item?.description}}</p> -->
        
         <div class="clinic-details">
-        <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{item?.address}}</p>
-        <p class="doc-location"><i class="fas fa-envelope"></i> {{item?.email}}</p>
-        <p class="doc-location"><i class="fas fa-phone"></i> {{item?.phone}}</p>
-       
-        </div>
-        <span style="display: inline;" *ngFor="let spe of item.specialities" class="clinic-services">
-        <span >{{spe?.name}}</span>
         
-        </span>
+        <p class="doc-location mt-3"><i class="fas fa-phone"></i> {{item?.phone}}</p>
+        <p class="doc-location mt-3"><i class="fas fa-map-marker-alt"></i> {{item?.address}}</p>
+        </div>
+       
         </div>
         </div>
         <div class="doc-info-right">
-        <div class="clini-infos">
-        
-        </div>
+       
         <div class="clinic-booking">
         <a class="view-pro-btn" style="color: #757575; border:1px solid #757575;" (click)="viewProfile(item.id)">View Profile</a>
         <a class="apt-btn" style="background-color: #757575; border:none" (click)="bookAppointment(item.id)">Book Appointment</a>

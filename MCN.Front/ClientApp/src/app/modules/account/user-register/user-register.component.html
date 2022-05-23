@@ -52,8 +52,8 @@
     <div class="form-group card-label">
         <select class="form-control select"  formControlName="loginType"  formControlName="loginType" name="loginType">
             <option [value]="0">Select User Type</option>
-            <option [value]="1">Patient</option>
-            <option [value]="2">Doctor</option> 
+            <option [value]="1">User</option>
+            <option [value]="2">Barber</option> 
             </select>
         </div>  
     <div class="form-group card-label"> 
@@ -70,10 +70,11 @@
 </div> 
 
 
-    <div class="text-right">
-    <a class="forgot-link" routerLink="/account/login">Already have an account?</a>
-    </div>
-    <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Signup</button>
+          <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Signup</button>
+
+          <div class="text-center dont-have">Already Registered? <a routerLink="account/register">Login</a></div>
+
+
     </form>
     
     </div>

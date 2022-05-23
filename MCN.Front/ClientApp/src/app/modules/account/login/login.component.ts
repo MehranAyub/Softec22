@@ -74,7 +74,7 @@ Login(){
     this.isEmailVerify=true;
     this.isEmailVerifyWithAuthToken=true;
     if(response?.data?.user.userLoginTypeId==LoginType.Patient){
-      this.router.navigateByUrl('/appointment/search-doctor');
+      this.router.navigateByUrl('/appointment/search-salon');
     }else{
       this.router.navigateByUrl('/doctor/register-salon');
     }

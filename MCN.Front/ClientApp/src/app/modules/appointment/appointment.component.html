@@ -19,33 +19,21 @@
     <div class="main-menu-wrapper">
     <div class="menu-header">
     <a href="index.html" class="menu-logo">
-    <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+    <img src="assets/images/logo.png" class="img-fluid" alt="Logo">
     </a>
     <a id="menu_close" class="menu-close" href="javascript:void(0);">
     <i class="fas fa-times"></i>
     </a>
     </div>
     <ul class="main-nav">
-    <li *ngIf="this.appointmentDto.userLoginTypeId==1">
-        
-    <a routerLink="/appointment/search-doctor">Book Appointment</a>
-</li>
-<li class="has-submenu" *ngIf="this.appointmentDto.userLoginTypeId==2">
-    <a >Barbers <i class="fas fa-chevron-down"></i></a>
-    <ul class="submenu">
-    <li routerLink="/doctor/appointments"><a >View Appointments</a></li>
-    <li><a routerLink="/doctor/profile">View Profile</a></li>
-    </ul>
- </li>
 
 <li class="has-submenu" *ngIf="this.appointmentDto.userLoginTypeId==1">
-<a >Users <i class="fas fa-chevron-down"></i></a>
-<ul class="submenu">
-<li><a routerLink="/appointment/search-doctor">Search Barber</a></li>
+ <a>Users <i class="fas fa-chevron-down"></i></a>
+<ul class="submenu"> 
+<li><a routerLink="/appointment/search-salon">Search Salons</a></li>
 <li><a routerLink="/appointment/patient-appointments">View Appointments</a></li>
-
+<li><a routerLink="/doctor/profile">My Profile</a></li>
 </ul>
-</li>
     <li class="login-link" *ngIf="user">
     <a (click)="logout()">Logout</a>
     </li>

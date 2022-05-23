@@ -13,8 +13,9 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs.Dtos
         public string SelectTimeSlot { get; set; }
         public int? AppointmentId { get; set; }
 
+        public int? SalonId { get; set; }
         public string DoctorName { get; set; }
-
+        public string SalonName { get; set; }
         public string UserName { get; set; }
 
         public string firstName { get; set; }

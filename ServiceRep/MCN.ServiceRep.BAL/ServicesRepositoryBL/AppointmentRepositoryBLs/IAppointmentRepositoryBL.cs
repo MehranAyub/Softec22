@@ -9,6 +9,8 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
    public interface IAppointmentRepositoryBL
     {
         SwallResponseWrapper searchDoctors(SearchDoctorFilterDto search);
+
+        SwallResponseWrapper GetSalonList(SearchDoctorFilterDto search);
         SwallResponseWrapper RegisterAppointment(AppointmentDto appointmentDto);
         SwallResponseWrapper RegisterTimeSlot(AppointmentDto appointmentDto);
         SwallResponseWrapper FindSlots(AppointmentDto appointmentDto);
@@ -19,7 +21,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.AppointmentRepositoryBLs
         SwallResponseWrapper SaveSpecialities(SpecialitiesDto specialitiesDto);
 
         SwallResponseWrapper UpdateUser(AppointmentDto specialitiesDto);
-        SwallResponseWrapper GetAppointments(int doctorid);
+        SwallResponseWrapper GetAppointments(int salonId);
         SwallResponseWrapper GetPatientAppointments(int patientId);
     }
 }

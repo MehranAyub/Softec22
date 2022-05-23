@@ -50,7 +50,7 @@ SelectedFile:File=null;
         this._appointmentService.UpdateUser(this.appointmentDto).subscribe((response)=>{
           if(response.statusCode==200){
             this._snackbarService.openSnack("Profile updated successfully",NotificationTypeEnum.Success);
-            this.router.navigateByUrl('/doctor/appointments');
+            this.ngOnInit();
           }
         })
        

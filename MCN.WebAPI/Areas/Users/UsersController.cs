@@ -339,13 +339,75 @@ namespace MCN.WebAPI.Areas.Users
         {
 
             var result = _UserRepositoryBL.GetSalon(id);
-            if (result.Data == null)
-            {
-                return Ok(result);
-            }
+           
 
             return Ok(result);
 
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Salon")]
+        public IActionResult Salon(int id)
+        {
+
+            var result = _UserRepositoryBL.Salon(id);
+
+
+            return Ok(result);
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetBarbers")]
+        public IActionResult GetBarbers(int id)
+        {
+
+            var result = _UserRepositoryBL.GetBarbers(id);
+           
+
+            return Ok(result);
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("SearchBarbers")]
+        public IActionResult SearchBarbers(int id)
+        {
+
+            var result = _UserRepositoryBL.SearchBarbers(id);
+
+
+            return Ok(result);
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetSalonID")]
+        public IActionResult GetSalonID(int id)
+        {
+
+            var result = _UserRepositoryBL.GetSalonID(id);
+
+
+            return Ok(result);
+
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("RemoveBarber")]
+        public IActionResult RemoveBarber([FromBody] int id)
+        {
+
+            var result = _UserRepositoryBL.RemoveBarber(id);
+
+
+            return Ok(result);
+        }
+
     }
 }

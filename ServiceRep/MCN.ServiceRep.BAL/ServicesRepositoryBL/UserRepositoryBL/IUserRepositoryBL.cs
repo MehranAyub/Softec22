@@ -21,8 +21,15 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
         string SalonLogo(FileDto dto);
         SwallResponseWrapper GetProfileImg(int id);
 
-
+        SwallResponseWrapper Salon(int id);
         SwallResponseWrapper GetSalon(int id);
+
+        SwallResponseWrapper GetBarbers(int id);
+
+        SwallResponseWrapper SearchBarbers(int id);
+        int GetSalonID(int id);
+
+        string RemoveBarber(int id);
         //SwallResponseWrapper PasswordChange(PasswordChangeDto passwordChangeDto);
         SwallResponseWrapper ReGenerateEmailVerificationPasscode(CreateUserDto userDto, string IpAddress);
        // Result<UserDto> Users(UserCriteria criteria);

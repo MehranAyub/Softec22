@@ -13,15 +13,14 @@ export class SelectedDayComponent implements OnInit {
   constructor(private activatedRoute:ActivatedRoute,private router:Router,private appointmentService:AppointmentService) {
 
     let user=JSON.parse(localStorage.getItem('currentUser'));
-    if(user){
+    if(user.user.userLoginTypeId==1){
     
     }else{
-      this.router.navigate(['/account/login']);
+      this.router.navigate(['/doctor/appointments']);
     }
     activatedRoute.queryParams.subscribe(params => {
       // this.isFromCashScreen = (params['isFromCashScreen'] == 'true');
       let doctorId = (params['doctorId'] || 0);
-
       if(doctorId>0){
        // this.registerAppointment(doctorId);
         this.getDoctor(doctorId);

@@ -157,5 +157,16 @@ namespace MCN.WebAPI.Areas.Appointments
             return Ok(result);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("GetSalonList")]
+        public IActionResult GetSalonList([FromBody] SearchDoctorFilterDto searchDoctorFilterDto)
+        {
+
+            var result = _AppointmentRepositoryBL.GetSalonList(searchDoctorFilterDto);
+
+
+            return Ok(result);
+        }
     }
 }
