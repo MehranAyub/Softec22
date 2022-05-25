@@ -76,7 +76,7 @@ Login(){
     if(response?.data?.user.userLoginTypeId==LoginType.Patient){
       this.router.navigateByUrl('/appointment/search-salon');
     }else{
-      this.router.navigateByUrl('/doctor/register-salon');
+      this.router.navigateByUrl('/barber/register-salon');
     }
     this._snackbarService.openSnack(response.swallText.html,NotificationTypeEnum.Success);  
   }

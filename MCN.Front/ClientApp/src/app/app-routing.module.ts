@@ -16,13 +16,7 @@ const routes: Routes = [
             (m) => m.AccountModule
           )
       },
-      {
-        path: 'job',
-        loadChildren: () =>
-          import('./modules/job/job.module').then(
-            (m) => m.JobModule
-          )
-      },
+     
       {
         path: 'appointment',
         loadChildren: () =>
@@ -33,13 +27,13 @@ const routes: Routes = [
       canActivate:[AuthGuard]
       },
       {
-        path: 'doctor',
+        path: 'barber',
         loadChildren: () =>
           import('./modules/doctor/doctor.module').then(
             (m) => m.DoctorModule
           ),
           
-      //canActivate:[AuthGuard]
+      canActivate:[AuthGuard]
       }
      
 ];

@@ -20,7 +20,7 @@ export class CheckoutComponent implements OnInit {
       this.appointmentDto.email=user.user.email;
       this.appointmentDto.phone=user.user.phone;
     }else{
-      this.router.navigate(['/doctor/appointments']);
+      this.router.navigate(['/barber/appointments']);
     }
     activatedRoute.queryParams.subscribe(params => {
       // this.isFromCashScreen = (params['isFromCashScreen'] == 'true');

@@ -20,6 +20,7 @@ export class AppointmentsComponent implements OnInit {
      this.appointmentService.GetAppointments(salonId).subscribe((res)=>{
       if(res.statusCode==200){
         this.appointments=res.data;
+        console.log(this.appointments)
       }
     })
     }

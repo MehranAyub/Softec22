@@ -27,7 +27,7 @@ this.errors="You have not any registered appointment at any salon"
     }
     else{
       
-      this.router.navigateByUrl('/doctor/appointments');
+      this.router.navigateByUrl('/barber/appointments');
     }
   }
 

@@ -71,5 +71,12 @@
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Tables\UserMultiFactors.sql" />
     <Build Include="dbo\Tables\UserLoginType.sql" />
+    <Build Include="dbo\Tables\TimeSlot.sql" />
+    <Build Include="dbo\Tables\Specialist.sql" />
+    <Build Include="dbo\Tables\Salon.sql" />
+    <Build Include="dbo\Tables\Files.sql" />
+    <Build Include="dbo\Tables\DoctorSpecialist.sql" />
+    <Build Include="dbo\Tables\AvailSlots.sql" />
+    <Build Include="dbo\Tables\Appointment.sql" />
   </ItemGroup>
 </Project>

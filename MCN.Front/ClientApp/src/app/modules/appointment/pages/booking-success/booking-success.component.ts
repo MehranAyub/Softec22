@@ -18,7 +18,7 @@ export class BookingSuccessComponent implements OnInit {
       });
     }
     else{
-      this.router.navigateByUrl('/doctor/appointments');
+      this.router.navigateByUrl('/barber/appointments');
     }
 
 

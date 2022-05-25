@@ -16,7 +16,7 @@ export class SelectedDayComponent implements OnInit {
     if(user.user.userLoginTypeId==1){
     
     }else{
-      this.router.navigate(['/doctor/appointments']);
+      this.router.navigate(['/barber/appointments']);
     }
     activatedRoute.queryParams.subscribe(params => {
       // this.isFromCashScreen = (params['isFromCashScreen'] == 'true');

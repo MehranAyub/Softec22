@@ -16,7 +16,7 @@ export class SearchDoctorComponent implements OnInit {
     if(user.user.userLoginTypeId!=1){
 
     
-      this.router.navigateByUrl('/doctor/appointments');
+      this.router.navigateByUrl('/barber/appointments');
     }
 
    }

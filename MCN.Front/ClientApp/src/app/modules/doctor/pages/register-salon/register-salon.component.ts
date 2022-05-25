@@ -78,7 +78,7 @@ export class RegisterSalonComponent implements OnInit {
   
           
               this._snackbarService.openSnack("Salon Rigistered Successfully",NotificationTypeEnum.Success);
-              this.router.navigateByUrl('/doctor/appointments');
+              this.router.navigateByUrl('/barber/appointments');
             }
           })
          
