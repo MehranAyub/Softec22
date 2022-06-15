@@ -6,10 +6,10 @@
     <nav aria-label="breadcrumb" class="page-breadcrumb">
     <ol class="breadcrumb">
     <li class="breadcrumb-item"><a >Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+    <li class="breadcrumb-item active" aria-current="page">SelectDate</li>
     </ol>
     </nav>
-    <h2 class="breadcrumb-title">Checkout</h2>
+  
     </div>
     </div>
     </div>
@@ -35,7 +35,7 @@
     <div class="col-md-6 col-sm-12">
     <div class="filter-widget">
         <div >
-        <input type="date" class="form-control " name="date" [(ngModel)]="appointmentDto.Date" placeholder="Select Date">
+        <input type="date" class="form-control " min="{{currentDate | date:'yyyy-MM-dd'}}" name="date" [(ngModel)]="appointmentDto.Date" placeholder="Select Date">
         </div>
         </div>
 </div>

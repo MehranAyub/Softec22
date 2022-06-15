@@ -8,7 +8,7 @@ import { AppointmentDto, AppointmentService } from '../../services/appointment.s
   styleUrls: ['./selected-day.component.scss']
 })
 export class SelectedDayComponent implements OnInit {
- 
+ currentDate:any=new Date();
   appointmentDto:AppointmentDto={AppointmentId:0,Date:new Date(),DoctorId:0,PatientId:0,SelectTimeSlot:'',firstName:'',lastName:'',email:'',phone:''}
   constructor(private activatedRoute:ActivatedRoute,private router:Router,private appointmentService:AppointmentService) {
 
