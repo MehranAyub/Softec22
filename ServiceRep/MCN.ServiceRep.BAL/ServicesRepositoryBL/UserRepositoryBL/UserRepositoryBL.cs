@@ -151,7 +151,7 @@ namespace MCN.ServiceRep.BAL.ServicesRepositoryBL.UserRepositoryBL
                 LoginFailureCount = 0,
                 Password = dto.Password,
                 UpdatedBy = DEFAULT_USERID,
-                IsEmailVerified = false,
+                IsEmailVerified = true,
                 Phone=dto.Phone,
                 Latitude=dto.Latitude,
                 Longitude=dto.Longitude,
